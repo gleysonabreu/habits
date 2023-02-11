@@ -1,0 +1,106 @@
+{
+  "title_not_logged_in": "Faça o login na plataforma.",
+  "title_logged_in": "Bem-vindo à plataforma.",
+  "buttons": {
+    "access_platform": "Acesse a plataforma",
+    "search_for_user": "Pesquise por um usuário",
+    "login_with_github": "Login com Github",
+    "login_with_twitch": "Login com Twitch"
+  },
+  "search": {
+    "placeholder_input": "Digite um nome de usuário...",
+    "no_results": "Nenhum resultado encontrado para",
+    "title": "Pesquisar",
+    "subtitle": "Pesquise por um usuário"
+  },
+  "header_dashboard": {
+    "menu": {
+      "dashboard": "Painel",
+      "account": "Conta"
+      },
+      "logout": "Sair",
+      "new_habit": "Novo hábito",
+      "new_task": "Nova tarefa"
+    },
+    "table_habits": {
+      "title": "Calendários de hábitos",
+      "subtitle": "Visão geral de seus hábitos",
+      "t_head": {
+        	"item1": "#",
+          "item2": "Titulo",
+          "item3": "Tarefas",
+          "item4": "Criado em",
+          "item5": "Link",
+          "button": "Abrir"
+      }
+    },
+    "account": {
+      "username": {
+        "title": "Alterar nome de usuário",
+        "placeholder_input":"Digite um nome de usuário",
+        "button": "Confirmar"
+      }
+    },
+    "create_habit": {
+      "title": "Criar novo hábito",
+      "form": {
+        "title": {
+          "label": "Título",
+          "placeholder_input": "Digite um título..."
+        },
+        "exercise": {
+          "label": "Qual seu comprometimento?",
+          "subtitle": "Insira várias tarefas separadas por uma vírgula.",
+          "placeholder_input": "Exercícios, dormir, etc..."
+        },
+        "recurrence": {
+          "label": "Qual a recorrência?"
+        },
+        "button": "Confirmar"
+      }
+    },
+    "create_task": {
+      "title": "Criar uma nova tarefa",
+      "exercise": {
+        "label": "Qual seu comprometimento?",
+        "subtitle": "Insira uma tarefa por vez.",
+        "placeholder_input": "Exercícios"
+      },
+      "recurrence": {
+        "label": "Qual a recorrência?"
+      },
+      "button": "Confirmar"
+    },
+    "profile": {
+      "title": "Calendários de hábitos",
+      "completed": "completados"
+    },
+    "messages": {
+      "fill_the_information": "Preencha as informações corretamente.",
+      "something_went_wrong": "Algo deu errado, tente novamente mais tarde.",
+      "username_updated": "Nome de usuário alterado com sucesso.",
+      "fill_username": "Preencha o nome de usuário.",
+      "username_yours": "Este é o seu nome de usuário.",
+      "task_success": "Tarefa alterada com sucesso.",
+      "select_a_day": "Selecione um dia da semana",
+      "add_one_task": "Adicione pelo menos uma tarefa.",
+      "enter_title": "Digite um título.",
+      "habit_created": "Hábito criado com sucesso.",
+      "task_created": "Tarefa criada com sucesso.",
+      "signin": "Tente entrar com uma conta diferente.",
+      "o_auth_signin": "Tente entrar com uma conta diferente.",
+      "o_auth_callback": "Tente entrar com uma conta diferente.",
+      "o_auth_create_account": "Tente entrar com uma conta diferente.",
+      "email_create_account": "Tente entrar com uma conta diferente.",
+      "callback": "Tente entrar com uma conta diferente.",
+      "o_auth_account_not_linked": "Para confirmar sua identidade, faça login com a mesma conta que você usou originalmente.",
+      "email_signin": "O email pode não ter sido enviado.",
+      "credentials_signin": "Login falhou, verifique se os dados que você forneceu estão corretos.",
+      "session_required": "Por favor, faça login para acessar esta página.",
+      "default": "Não foi possível fazer login.",
+      "username_length": "O nome de usuário deve ter entre 3 e 20 caracteres."
+    },
+    "dashboard_box": {
+      "no_habits": "Você não tem hábitos!"
+    }
+}

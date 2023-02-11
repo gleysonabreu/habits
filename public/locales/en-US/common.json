@@ -1,0 +1,106 @@
+{
+  "title_not_logged_in": "Log in to the platform.",
+  "title_logged_in": "Welcome to the platform.",
+  "buttons": {
+    "access_platform": "Access the platform",
+    "search_for_user": "Search for a user",
+    "login_with_github": "Login with GitHub",
+    "login_with_twitch": "Login with Twitch"
+  },
+  "search": {
+    "placeholder_input": "Enter a username...",
+    "no_results": "No results for",
+    "title": "Search",
+    "subtitle": "Search for a user"
+  },
+  "header_dashboard": {
+    "menu": {
+      "dashboard": "Dashboard",
+      "account": "Account"
+      },
+      "logout": "Sign out",
+      "new_habit": "New habit",
+      "new_task": "New task"
+    },
+    "table_habits": {
+      "title": "Habits calendars",
+      "subtitle": "Overview of your habit calendars.",
+      "t_head": {
+        	"item1": "#",
+          "item2": "Title",
+          "item3": "Tasks",
+          "item4": "Created at",
+          "item5": "Link",
+          "button": "Go"
+      }
+    },
+    "account": {
+      "username": {
+        "title": "Change username",
+        "placeholder_input":"Enter username",
+        "button": "Confirm"
+      }
+    },
+    "create_habit": {
+      "title": "Create a new habit",
+      "form": {
+        "title": {
+          "label": "Title",
+          "placeholder_input": "Enter a title"
+        },
+        "exercise": {
+          "label": "What is your commitment?",
+          "subtitle": "Enter multiple tasks separated by a comma.",
+          "placeholder_input": "Exercise, sleep, etc..."
+        },
+        "recurrence": {
+          "label": "Which recurrence?"
+        },
+        "button": "Confirm"
+      }
+    },
+    "create_task": {
+      "title": "Create a new task",
+      "exercise": {
+        "label": "What is your commitment?",
+        "subtitle": "Enter one task at a time.",
+        "placeholder_input": "Exercise"
+      },
+      "recurrence": {
+        "label": "Which recurrence?"
+      },
+      "button": "Confirm"
+    },
+    "profile": {
+      "title": "Habit calendars",
+      "completed": "completed"
+    },
+    "messages": {
+      "fill_the_information": "Fill in the information correctly.",
+      "something_went_wrong": "Something went wrong, try again later.",
+      "username_updated": "Username changed successfully.",
+      "fill_username": "Fill in the username.",
+      "username_yours": "This is your username.",
+      "task_success": "Task updated successfully.",
+      "select_a_day": "Please select at least one day of the week.",
+      "add_one_task": "Please enter at least one task.",
+      "enter_title": "Please enter a title.",
+      "habit_created": "Habit created successfully.",
+      "task_created": "Task created successfully.",
+      "signin": "Try signing in with a different account.",
+      "o_auth_signin": "Try signing in with a different account.",
+      "o_auth_callback": "Try signing in with a different account.",
+      "o_auth_create_account": "Try signing in with a different account.",
+      "email_create_account": "Try signing in with a different account.",
+      "callback": "Try signing in with a different account.",
+      "o_auth_account_not_linked": "To confirm your identity, sign in with the same account you used originally.",
+      "email_signin": "The e-mail could not be sent.",
+      "credentials_signin": "Sign in failed. Check the details you provided are correct.",
+      "session_required": "Please sign in to access this page.",
+      "default": "Unable to sign in.",
+      "username_length": "The username must be between 3 and 20 characters."
+    },
+    "dashboard_box": {
+      "no_habits": "No habits!"
+    }
+}
