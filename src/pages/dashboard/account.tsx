@@ -40,12 +40,19 @@ export default function Account() {
   });
 
   const handleUpdateUsername: SubmitHandler<AccountInputs> = async data => {
+    const toastId = toast.loading(translate('messages.loading'));
     try {
       setLoading(true);
       await api.patch('/users/update/username', {
         username: data.username,
       });
-      toast.success(translate('messages.username_updated'));
+      toast.update(toastId, {
+        render: translate('messages.username_updated'),
+        type: 'success',
+        isLoading: false,
+        autoClose: 5000,
+        closeButton: true,
+      });
       session!.user.username = data.username;
       reset();
       setLoading(false);
@@ -55,10 +62,22 @@ export default function Account() {
         const message = isArray
           ? translate('messages.fill_the_information')
           : error.response.data.message;
-        toast.error(message);
+        toast.update(toastId, {
+          render: message,
+          type: 'error',
+          isLoading: false,
+          autoClose: 5000,
+          closeButton: true,
+        });
         setLoading(false);
       } else {
-        toast.error(translate('messages.something_went_wrong'));
+        toast.update(toastId, {
+          render: translate('messages.something_went_wrong'),
+          type: 'error',
+          isLoading: false,
+          autoClose: 5000,
+          closeButton: true,
+        });
         setLoading(false);
       }
     }
@@ -102,7 +121,7 @@ export default function Account() {
               <Button
                 size="md"
                 variant="green"
-                isLoading={loading}
+                disabled={loading}
                 type="submit"
               >
                 <Check size={24} />
