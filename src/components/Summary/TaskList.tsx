@@ -35,8 +35,8 @@ export function TaskList({
 
   const { t: translate } = useTranslation('common');
 
-  const convertDate = dayjs(date).utc().local().format('YYYY-MM-DD');
-  const weekDay = dayjs(date).utc().local().get('day');
+  const convertDate = dayjs(date).format('YYYY-MM-DD');
+  const weekDay = dayjs(date).get('day');
 
   useEffect(() => {
     api
