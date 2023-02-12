@@ -98,7 +98,8 @@
       "credentials_signin": "Sign in failed. Check the details you provided are correct.",
       "session_required": "Please sign in to access this page.",
       "default": "Unable to sign in.",
-      "username_length": "The username must be between 3 and 20 characters."
+      "username_length": "The username must be between 3 and 20 characters.",
+      "loading": "Loading..."
     },
     "dashboard_box": {
       "no_habits": "No habits!"

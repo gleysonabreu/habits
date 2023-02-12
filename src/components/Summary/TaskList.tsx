@@ -1,13 +1,10 @@
 import * as Checkbox from '@radix-ui/react-checkbox';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import { useTranslation } from 'next-i18next';
 import { Check } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../../libs/axios';
-
-dayjs.extend(utc);
 
 type PossibleTask = {
   id: string;
@@ -57,6 +54,7 @@ export function TaskList({
   }, [convertDate, habitId, onAmountChanged, weekDay]);
 
   async function handleToggleTask(taskId: string) {
+    const toastId = toast.loading(translate('messages.loading'));
     try {
       await api.post(`/tasks/${taskId}`, {
         date: convertDate,
@@ -73,9 +71,21 @@ export function TaskList({
 
       setCompletedTasks(tasksCompleted);
       onCompletedChanged(tasksCompleted.length);
-      toast.success(translate('messages.task_success'));
+      toast.update(toastId, {
+        type: 'success',
+        render: translate('messages.task_success'),
+        isLoading: false,
+        autoClose: 5000,
+        closeButton: true,
+      });
     } catch (error) {
-      toast.error(translate('messages.something_went_wrong'));
+      toast.update(toastId, {
+        type: 'error',
+        render: translate('messages.something_went_wrong'),
+        isLoading: false,
+        autoClose: 5000,
+        closeButton: true,
+      });
     }
   }
   return (
