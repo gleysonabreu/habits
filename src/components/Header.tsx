@@ -143,6 +143,33 @@ export function Header() {
                     />
                     <h1>{session?.user.name}</h1>
                   </div>
+
+                  <nav className="flex">
+                    <ul className="w-[unset] h-full flex overflow-auto list-none flex-col items-center justify-center m-[unset] gap-4">
+                      {menus.map((menu, index) => (
+                        <li
+                          key={index}
+                          className="mt-[unset] flex items-center"
+                        >
+                          <Link
+                            href={menu.href}
+                            className={classNames(
+                              'hover:text-gray-200 hover:border-brand-blue-mid px-0 h-full flex items-center transition-all ease-in border-b-2',
+                              {
+                                'border-brand-blue-mid text-gray-100 font-bold':
+                                  router.pathname === menu.href,
+                                'border-transparent text-gray-400':
+                                  router.pathname !== menu.href,
+                              },
+                            )}
+                          >
+                            {menu.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+
                   {router.pathname === '/dashboard/habit/[id]' ? (
                     <DialogContent.Root>
                       <Button variant="blue" size="md" asChild>
