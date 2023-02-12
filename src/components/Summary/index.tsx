@@ -48,15 +48,10 @@ export function Summary({ data, id }: SummaryProps) {
 
           <div className="grid grid-flow-row lg:grid-flow-col gap-2 grid-cols-7 lg:grid-cols-[none] lg:grid-rows-7">
             {calendar.map(date => {
-              const newDate = dayjs(date).utc().local().toDate();
-              const convertDateToFormat = dayjs(date)
-                .utc()
-                .local()
-                .format('YYYY-MM-DD');
-
+              const convertDate = dayjs(date).utc().local();
               const findSummaryByDate = data.find(summary => {
                 const summaryDate = String(summary.date).split('T')[0];
-                return convertDateToFormat === summaryDate;
+                return convertDate.format('YYYY-MM-DD') === summaryDate;
               });
 
               return (
@@ -65,7 +60,7 @@ export function Summary({ data, id }: SummaryProps) {
                   defaultAmount={findSummaryByDate?.amount}
                   defaultCompleted={findSummaryByDate?.completed}
                   habitId={id}
-                  date={newDate}
+                  date={convertDate.toDate()}
                 />
               );
             })}
