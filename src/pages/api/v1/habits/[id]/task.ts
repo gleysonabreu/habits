@@ -20,8 +20,8 @@ async function createTask(request: NextApiRequest, response: NextApiResponse) {
     id: z.string(),
   });
   const createTaskBody = z.object({
-    task: z.string(),
-    weekDays: z.array(z.number().min(0).max(6)),
+    task: z.string().min(1).max(255),
+    weekDays: z.array(z.number().min(0).max(6)).nonempty(),
   });
 
   const { id } = createTaskParams.parse(request.query);
