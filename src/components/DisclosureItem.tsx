@@ -2,6 +2,7 @@ import { Disclosure, Transition } from '@headlessui/react';
 import { Habit } from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { useTranslation } from 'next-i18next';
 import { CaretUp, CircleNotch } from 'phosphor-react';
 import { useState } from 'react';
@@ -11,6 +12,8 @@ import { createCalendar } from '../utils/calendar';
 import { menuCalendar } from '../utils/menu-calendar';
 import { Activity } from './Summary/Activity';
 import { Tooltip } from './Tooltip';
+
+dayjs.extend(utc);
 
 type Summary = {
   amount: number;
@@ -106,9 +109,12 @@ export function DisclosureItem({ habit }: DisclosureItemProps) {
 
                   <div className="grid grid-flow-row lg:grid-flow-col gap-3 grid-cols-7 lg:grid-cols-[none] lg:grid-rows-7">
                     {calendar.map((date, index) => {
-                      const findSummaryByDate = summaries.find(summary =>
-                        dayjs(summary.date).isSame(date, 'date'),
-                      );
+                      const convertDate = dayjs(date).utc().local();
+                      const findSummaryByDate = summaries.find(summary => {
+                        const summaryDate = String(summary.date).split('T')[0];
+                        return convertDate.format('YYYY-MM-DD') === summaryDate;
+                      });
+
                       const completed = findSummaryByDate?.completed || 0;
                       const dateFormatted = dayjs(date).format('MMM DD, YYYY');
                       const title = `${dateFormatted}, ${translate(
