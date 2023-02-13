@@ -99,7 +99,8 @@
       "session_required": "Por favor, faça login para acessar esta página.",
       "default": "Não foi possível fazer login.",
       "username_length": "O nome de usuário deve ter entre 3 e 20 caracteres.",
-      "loading": "Carregando..."
+      "loading": "Carregando...",
+      "success": "Sucesso!"
     },
     "dashboard_box": {
       "no_habits": "Você não tem hábitos!"

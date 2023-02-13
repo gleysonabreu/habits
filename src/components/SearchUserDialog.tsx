@@ -1,9 +1,13 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CircleNotch, MagnifyingGlass } from 'phosphor-react';
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { z } from 'zod';
 import { api } from '../libs/axios';
 import { Button } from './Button';
 import { Dialog } from './Dialog';
@@ -15,27 +19,42 @@ type UserProfile = {
   username: string;
 };
 
+type SearchUserInputs = {
+  username: string;
+};
+
 export function SearchUserDialog() {
   const [users, setUsers] = useState<UserProfile[]>([]);
-  const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
 
   const [noUsers, setNoUsers] = useState({
     show: false,
     message: '',
   });
-
   const { t: translate } = useTranslation('common');
 
-  async function handleSearchUser() {
-    setLoading(true);
-    if (username.length < 3) {
-      toast.error(translate('messages.username_length'));
-      setLoading(false);
-      return;
-    }
+  const schema = z.object({
+    username: z
+      .string()
+      .min(3, { message: translate('messages.username_length') as string })
+      .max(20, { message: translate('messages.username_length') as string }),
+  });
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<SearchUserInputs>({
+    resolver: zodResolver(schema),
+  });
+
+  const handleSearchUser: SubmitHandler<SearchUserInputs> = async ({
+    username,
+  }) => {
+    const toastId = toast.loading(translate('messages.loading'));
     try {
+      setLoading(true);
       const res = await api.get(`/users`, {
         params: {
           username,
@@ -52,33 +71,64 @@ export function SearchUserDialog() {
       }
 
       setUsers(res.data);
+      toast.update(toastId, {
+        isLoading: false,
+        autoClose: 5000,
+        closeButton: true,
+        render: translate('messages.success'),
+        type: 'success',
+      });
       setLoading(false);
-    } catch (error) {
-      toast.error(translate('messages.something_went_wrong'));
-      setLoading(false);
+    } catch (error: any) {
+      if (error.response) {
+        const isArray = Array.isArray(error.response.data);
+        const message = isArray
+          ? translate('messages.fill_the_information')
+          : error.response.data.message;
+        toast.update(toastId, {
+          render: message,
+          type: 'error',
+          isLoading: false,
+          autoClose: 5000,
+          closeButton: true,
+        });
+        setLoading(false);
+      } else {
+        toast.update(toastId, {
+          render: translate('messages.something_went_wrong'),
+          type: 'error',
+          isLoading: false,
+          autoClose: 5000,
+          closeButton: true,
+        });
+        setLoading(false);
+      }
     }
-  }
+  };
 
   return (
     <Dialog title={translate('search.title')}>
-      <div className="mt-8 flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit(handleSearchUser)}
+        className="mt-8 flex flex-col gap-4"
+      >
         <fieldset className="flex flex-col gap-5 mb-3">
           <label className="text-sm text-gray-200 text-left">
             {translate('search.subtitle')}
           </label>
           <div className="flex gap-2 flex-col md:flex-row">
             <input
-              value={username}
-              onChange={e => setUsername(e.target.value)}
+              {...register('username', { required: true })}
               placeholder={translate('search.placeholder_input') as string}
-              className="focus:outline-none focus:ring-2 ring-opacity-40 ring-gray-950 bg-zinc-800 outline-none w-full p-3 border border-zinc-800 flex-1 inline-flex items-center justify-center rounded-md"
+              className={classNames(
+                'focus:outline-none focus:ring-2 ring-opacity-40 bg-zinc-800 outline-none w-full p-3 border border-zinc-800 flex-1 inline-flex items-center justify-center rounded-md',
+                {
+                  'ring-gray-950': !errors.username,
+                  'ring-red-500': errors.username,
+                },
+              )}
             />
-            <Button
-              variant="blue"
-              size="lg"
-              onClick={handleSearchUser}
-              isLoading={loading}
-            >
+            <Button variant="blue" size="lg" isLoading={loading} type="submit">
               {loading ? (
                 <CircleNotch className="animate-spin" size={20} />
               ) : (
@@ -86,8 +136,12 @@ export function SearchUserDialog() {
               )}
             </Button>
           </div>
+
+          {errors.username && (
+            <span className="text-red-500">{errors.username.message}</span>
+          )}
         </fieldset>
-      </div>
+      </form>
 
       <div className="flex w-full px-3 py-0">
         {noUsers.show && (
