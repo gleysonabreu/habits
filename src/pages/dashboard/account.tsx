@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames';
 import { GetServerSideProps } from 'next';
+import { unstable_getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -13,6 +14,7 @@ import { z } from 'zod';
 import { Button } from '../../components/Button';
 import { Layout } from '../../components/Layout';
 import { api } from '../../libs/axios';
+import { authOptions } from '../api/auth/[...nextauth]';
 
 type AccountInputs = {
   username: string;
@@ -135,8 +137,22 @@ export default function Account() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale ?? 'en-US', ['common'])),
-  },
-});
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { locale, req, res } = context;
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? 'en-US', ['common'])),
+    },
+  };
+};

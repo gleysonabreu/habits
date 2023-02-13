@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { GetServerSideProps } from 'next';
+import { unstable_getServerSession } from 'next-auth';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
@@ -8,6 +9,7 @@ import { Button } from '../../components/Button';
 import { Layout } from '../../components/Layout';
 import { ScrollArea } from '../../components/ScrollArea';
 import { useHabits } from '../../hooks/useHabits';
+import { authOptions } from '../api/auth/[...nextauth]';
 
 export default function Dashboard() {
   const { habits, totalHabits } = useHabits();
@@ -124,8 +126,22 @@ export default function Dashboard() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale ?? 'en-US', ['common'])),
-  },
-});
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { locale, req, res } = context;
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? 'en-US', ['common'])),
+    },
+  };
+};
