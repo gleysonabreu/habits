@@ -69,7 +69,11 @@
       "recurrence": {
         "label": "Which recurrence?"
       },
-      "button": "Confirm"
+      "button": "Confirm",
+      "messages": {
+        "task_required": "Enter a task with more than 3 characters.",
+        "week_days_required": "Select at least one day of the week."
+      }
     },
     "profile": {
       "title": "Habit calendars",

@@ -1,51 +1,58 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
+import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { Check } from 'phosphor-react';
 import { useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { z } from 'zod';
 import { api } from '../libs/axios';
 import { menuCalendar } from '../utils/menu-calendar';
 import { Button } from './Button';
 import { Dialog } from './Dialog';
 import { ToggleItem } from './ToggleItem';
 
+type CreateTaskInputs = {
+  task: string;
+  weekDays: string[];
+};
+
 export function CreateTaskDialog() {
-  const [weekDays, setWeekDays] = useState<string[]>([]);
-  const [task, setTask] = useState<string>('');
   const [loadingCreateTask, setLoadingCreateTask] = useState<boolean>(false);
   const router = useRouter();
 
   const { t: translate, i18n } = useTranslation('common');
   dayjs.locale(i18n.resolvedLanguage);
 
-  async function handleCreateTask() {
-    setLoadingCreateTask(true);
+  const schema = z.object({
+    task: z.string().min(3),
+    weekDays: z.array(z.string().min(1)).nonempty(),
+  });
 
-    if (weekDays.length === 0) {
-      toast.error(translate('messages.select_a_day'));
-      setLoadingCreateTask(false);
-      return;
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    control,
+  } = useForm<CreateTaskInputs>({
+    resolver: zodResolver(schema),
+  });
 
-    if (task === '') {
-      toast.error(translate('messages.add_one_task'));
-      setLoadingCreateTask(false);
-      return;
-    }
-
+  const handleCreateTask: SubmitHandler<CreateTaskInputs> = async data => {
     try {
+      setLoadingCreateTask(true);
       const id = router.query.id as string;
       await api.post(`/habits/${id}/task`, {
-        task: task.trim(),
-        weekDays: weekDays.map(Number),
+        task: data.task.trim(),
+        weekDays: data.weekDays.map(Number),
       });
-
+      reset();
       toast.success(translate('messages.task_created'));
       setLoadingCreateTask(false);
-      setWeekDays([]);
-      setTask('');
     } catch (error: any) {
       if (error.response.data) {
         const isArray = Array.isArray(error.response.data);
@@ -59,58 +66,85 @@ export function CreateTaskDialog() {
 
       setLoadingCreateTask(false);
     }
-  }
+  };
   return (
     <Dialog title={translate('create_task.title')}>
-      <div className="mt-8 flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit(handleCreateTask)}
+        className="mt-8 flex flex-col gap-4"
+      >
         <fieldset className="flex flex-col gap-5 mb-3">
           <label className="text-sm text-gray-200 text-left">
             {translate('create_task.exercise.label')}
             <p>{translate('create_task.exercise.subtitle')}</p>
           </label>
           <input
-            value={task}
-            onChange={e => setTask(e.target.value)}
+            {...register('task', { required: true })}
             placeholder="Exercise, sleep well, ete..."
-            className="focus:outline-none focus:ring-2 ring-opacity-40 ring-gray-950 bg-zinc-800 outline-none w-full p-3 border border-zinc-800 flex-1 inline-flex items-center justify-center rounded-md h-6"
+            className={classNames(
+              'focus:outline-none focus:ring-2 ring-opacity-40 bg-zinc-800 outline-none w-full p-3 border border-zinc-800 flex-1 inline-flex items-center justify-center rounded-md h-6',
+              {
+                'ring-gray-950': !errors.task,
+                'ring-red-500': errors.task,
+              },
+            )}
           />
+          {errors.task && (
+            <p className="text-red-500 text-sm">
+              {translate('create_task.messages.task_required')}
+            </p>
+          )}
         </fieldset>
         <fieldset className="flex flex-col gap-5 mb-3">
           <label className="text-sm text-gray-200 text-left">
             {translate('create_task.recurrence.label')}
           </label>
-          <ToggleGroup.Root
-            type="multiple"
-            className="grid grid-cols-2 gap-2"
-            value={weekDays}
-            onValueChange={setWeekDays}
-          >
-            {menuCalendar.map((week, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <ToggleItem
-                  isChecked={weekDays.includes(index.toString())}
-                  value={index.toString()}
-                  title={dayjs().weekday(week.weekDayName).format('dddd')}
-                />
-                <label className="text-base text-gray-200 text-left capitalize">
-                  {dayjs().weekday(week.weekDayName).format('dddd')}
-                </label>
-              </div>
-            ))}
-          </ToggleGroup.Root>
+          <Controller
+            control={control}
+            name="weekDays"
+            render={({ field }) => (
+              <ToggleGroup.Root
+                type="multiple"
+                {...field}
+                className="grid grid-cols-2 gap-2"
+                value={field.value}
+                onValueChange={field.onChange}
+              >
+                {menuCalendar.map((week, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <ToggleItem
+                      isChecked={
+                        field.value?.includes(index.toString()) ?? false
+                      }
+                      value={index.toString()}
+                      title={dayjs().weekday(week.weekDayName).format('dddd')}
+                    />
+                    <label className="text-base text-gray-200 text-left capitalize">
+                      {dayjs().weekday(week.weekDayName).format('dddd')}
+                    </label>
+                  </div>
+                ))}
+              </ToggleGroup.Root>
+            )}
+          />
+          {errors.weekDays && (
+            <p className="text-red-500 text-sm">
+              {translate('create_task.messages.week_days_required')}
+            </p>
+          )}
         </fieldset>
         <fieldset className="flex flex-col gap-5 mb-3">
           <Button
             size="lg"
             variant="green"
-            onClick={handleCreateTask}
+            type="submit"
             isLoading={loadingCreateTask}
           >
             <Check size={24} />
             {translate('create_task.button')}
           </Button>
         </fieldset>
-      </div>
+      </form>
     </Dialog>
   );
 }
