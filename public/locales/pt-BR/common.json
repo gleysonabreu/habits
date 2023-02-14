@@ -56,7 +56,12 @@
         "recurrence": {
           "label": "Qual a recorrência?"
         },
-        "button": "Confirmar"
+        "button": "Confirmar",
+        "messages": {
+          "add_one_task": "Adicione pelo menos uma tarefa com mais de 3 caracteres.",
+          "enter_title": "Digite um título.",
+          "select_a_day": "Selecione pelo menos um dia da semana."
+        }
       }
     },
     "create_task": {
@@ -86,9 +91,6 @@
       "fill_username": "Preencha o nome de usuário.",
       "username_yours": "Este é o seu nome de usuário.",
       "task_success": "Tarefa alterada com sucesso.",
-      "select_a_day": "Selecione um dia da semana",
-      "add_one_task": "Adicione pelo menos uma tarefa.",
-      "enter_title": "Digite um título.",
       "habit_created": "Hábito criado com sucesso.",
       "task_created": "Tarefa criada com sucesso.",
       "signin": "Tente entrar com uma conta diferente.",

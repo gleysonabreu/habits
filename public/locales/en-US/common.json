@@ -56,7 +56,12 @@
         "recurrence": {
           "label": "Which recurrence?"
         },
-        "button": "Confirm"
+        "button": "Confirm",
+        "messages": {
+          "select_a_day": "Select at least one day of the week.",
+          "add_one_task": "Enter a tasks with more than 3 characters.",
+          "enter_title": "Enter a title."
+        }
       }
     },
     "create_task": {
@@ -86,9 +91,6 @@
       "fill_username": "Fill in the username.",
       "username_yours": "This is your username.",
       "task_success": "Task updated successfully.",
-      "select_a_day": "Please select at least one day of the week.",
-      "add_one_task": "Please enter at least one task.",
-      "enter_title": "Please enter a title.",
       "habit_created": "Habit created successfully.",
       "task_created": "Task created successfully.",
       "signin": "Try signing in with a different account.",

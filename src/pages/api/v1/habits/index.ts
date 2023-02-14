@@ -33,8 +33,8 @@ async function createHabit(request: NextApiRequest, response: NextApiResponse) {
   const user = request.user;
 
   const createHabit = z.object({
-    tasks: z.array(z.string()),
-    weekDays: z.array(z.number().min(0).max(6)),
+    tasks: z.array(z.string().trim().min(3)).nonempty(),
+    weekDays: z.array(z.number().min(0).max(6)).nonempty(),
     title: z.string().min(1).max(50),
   });
 
