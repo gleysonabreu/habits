@@ -44,5 +44,13 @@ async function getSummary(request: NextApiRequest, response: NextApiResponse) {
     FROM days D
     `;
 
-  return response.status(200).json({ summary });
+  const filteredSummary = summary.map(item => {
+    return {
+      ...item,
+      completed: Number(item.completed),
+      amount: Number(item.amount),
+    };
+  });
+
+  return response.status(200).json({ summary: filteredSummary });
 }
