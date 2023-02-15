@@ -17,7 +17,7 @@ async function patchUsername(
   response: NextApiResponse,
 ) {
   const getUsername = z.object({
-    username: z.string().min(1).max(15),
+    username: z.string().min(3).max(15),
   });
 
   const { username } = getUsername.parse(request.body);

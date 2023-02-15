@@ -12,7 +12,7 @@ export default nextConnect({
 
 async function getUsers(request: NextApiRequest, response: NextApiResponse) {
   const getUserProfile = z.object({
-    username: z.string(),
+    username: z.string().min(3).max(20),
   });
 
   const { username } = getUserProfile.parse(request.query);

@@ -16,7 +16,7 @@ import { ToggleItem } from './ToggleItem';
 
 type CreateHabitInputs = {
   title: string;
-  task: string;
+  tasks: string;
   weekDays: string[];
 };
 
@@ -28,7 +28,7 @@ export function CreateHabitDialog() {
 
   const schema = z.object({
     title: z.string().min(3).max(50),
-    task: z.string().min(3),
+    tasks: z.string().min(3),
     weekDays: z.array(z.string().min(1)).nonempty(),
   });
 
@@ -38,6 +38,7 @@ export function CreateHabitDialog() {
     formState: { errors },
     reset,
     control,
+    setError,
   } = useForm<CreateHabitInputs>({
     resolver: zodResolver(schema),
   });
@@ -45,7 +46,7 @@ export function CreateHabitDialog() {
   const handleCreateHabit: SubmitHandler<CreateHabitInputs> = async data => {
     try {
       setLoadingCreateHabit(true);
-      const tasks = data.task
+      const tasks = data.tasks
         .split(',')
         .map(task => task.trim())
         .filter(task => task !== '' && task.length > 2);
@@ -55,16 +56,16 @@ export function CreateHabitDialog() {
       setLoadingCreateHabit(false);
       reset();
     } catch (error: any) {
-      if (error.response) {
-        const isArray = Array.isArray(error.response.data);
-        const message = isArray
-          ? translate('messages.fill_the_information')
-          : error.response.data.message;
-        toast.error(message);
+      if (error.response.data.errors) {
+        error.response.data.errors.forEach((error: any) => {
+          setError(error.path[0], {});
+        });
+      } else if (error.response.data.message) {
+        toast.error(error.response.data.message);
       } else {
         toast.error(translate('messages.something_went_wrong'));
-        setLoadingCreateHabit(false);
       }
+      setLoadingCreateHabit(false);
     }
   };
   return (
@@ -100,7 +101,7 @@ export function CreateHabitDialog() {
             <p>{translate('create_habit.form.exercise.subtitle')}</p>
           </label>
           <input
-            {...register('task', { required: true })}
+            {...register('tasks', { required: true })}
             placeholder={
               translate(
                 'create_habit.form.exercise.placeholder_input',
@@ -109,12 +110,12 @@ export function CreateHabitDialog() {
             className={classNames(
               'focus:outline-none focus:ring-2 ring-opacity-40 bg-zinc-800 outline-none w-full p-3 border border-zinc-800 flex-1 inline-flex items-center justify-center rounded-md h-6',
               {
-                'ring-gray-950': !errors.task,
-                'ring-red-500': errors.task,
+                'ring-gray-950': !errors.tasks,
+                'ring-red-500': errors.tasks,
               },
             )}
           />
-          {errors.task && (
+          {errors.tasks && (
             <p className="text-red-500 text-sm">
               {translate('create_habit.form.messages.add_one_task')}
             </p>

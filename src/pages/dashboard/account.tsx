@@ -27,9 +27,7 @@ export default function Account() {
   const { t: translate } = useTranslation('common');
 
   const schema = z.object({
-    username: z
-      .string()
-      .min(3, { message: translate('messages.fill_username') as string }),
+    username: z.string().min(3),
   });
 
   const {
@@ -37,6 +35,7 @@ export default function Account() {
     handleSubmit,
     formState: { errors },
     reset,
+    setError,
   } = useForm<AccountInputs>({
     resolver: zodResolver(schema),
   });
@@ -59,19 +58,19 @@ export default function Account() {
       reset();
       setLoading(false);
     } catch (error: any) {
-      if (error.response) {
-        const isArray = Array.isArray(error.response.data);
-        const message = isArray
-          ? translate('messages.fill_the_information')
-          : error.response.data.message;
+      if (error.response.data.errors) {
+        toast.dismiss(toastId);
+        error.response.data.errors.forEach((error: any) => {
+          setError(error.path[0], {});
+        });
+      } else if (error.response.data.message) {
         toast.update(toastId, {
-          render: message,
+          render: error.response.data.message,
           type: 'error',
           isLoading: false,
           autoClose: 5000,
           closeButton: true,
         });
-        setLoading(false);
       } else {
         toast.update(toastId, {
           render: translate('messages.something_went_wrong'),
@@ -80,8 +79,8 @@ export default function Account() {
           autoClose: 5000,
           closeButton: true,
         });
-        setLoading(false);
       }
+      setLoading(false);
     }
   };
 
@@ -116,7 +115,9 @@ export default function Account() {
                 )}
               />
               {errors.username && (
-                <span className="text-red-500">{errors.username.message}</span>
+                <span className="text-red-500">
+                  {translate('messages.fill_username')}
+                </span>
               )}
             </fieldset>
             <fieldset className="flex flex-col gap-5 mb-3">

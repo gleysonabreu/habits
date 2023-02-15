@@ -34,10 +34,7 @@ export function SearchUserDialog() {
   const { t: translate } = useTranslation('common');
 
   const schema = z.object({
-    username: z
-      .string()
-      .min(3, { message: translate('messages.username_length') as string })
-      .max(20, { message: translate('messages.username_length') as string }),
+    username: z.string().min(3).max(20),
   });
 
   const {
@@ -45,6 +42,7 @@ export function SearchUserDialog() {
     handleSubmit,
     formState: { errors },
     reset,
+    setError,
   } = useForm<SearchUserInputs>({
     resolver: zodResolver(schema),
   });
@@ -71,28 +69,23 @@ export function SearchUserDialog() {
       }
 
       setUsers(res.data);
-      toast.update(toastId, {
-        isLoading: false,
-        autoClose: 5000,
-        closeButton: true,
-        render: translate('messages.success'),
-        type: 'success',
-      });
+      toast.dismiss(toastId);
       setLoading(false);
+      reset();
     } catch (error: any) {
-      if (error.response) {
-        const isArray = Array.isArray(error.response.data);
-        const message = isArray
-          ? translate('messages.fill_the_information')
-          : error.response.data.message;
+      if (error.response.data.errors) {
+        toast.dismiss(toastId);
+        error.response.data.errors.forEach((error: any) => {
+          setError(error.path[0], {});
+        });
+      } else if (error.response.data.message) {
         toast.update(toastId, {
-          render: message,
+          render: error.response.data.message,
           type: 'error',
           isLoading: false,
           autoClose: 5000,
           closeButton: true,
         });
-        setLoading(false);
       } else {
         toast.update(toastId, {
           render: translate('messages.something_went_wrong'),
@@ -101,8 +94,8 @@ export function SearchUserDialog() {
           autoClose: 5000,
           closeButton: true,
         });
-        setLoading(false);
       }
+      setLoading(false);
     }
   };
 
@@ -138,7 +131,9 @@ export function SearchUserDialog() {
           </div>
 
           {errors.username && (
-            <span className="text-red-500">{errors.username.message}</span>
+            <span className="text-red-500">
+              {translate('messages.username_length')}
+            </span>
           )}
         </fieldset>
       </form>

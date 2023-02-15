@@ -38,6 +38,7 @@ export function CreateTaskDialog() {
     formState: { errors },
     reset,
     control,
+    setError,
   } = useForm<CreateTaskInputs>({
     resolver: zodResolver(schema),
   });
@@ -54,12 +55,12 @@ export function CreateTaskDialog() {
       toast.success(translate('messages.task_created'));
       setLoadingCreateTask(false);
     } catch (error: any) {
-      if (error.response.data) {
-        const isArray = Array.isArray(error.response.data);
-        const message = isArray
-          ? translate('messages.fill_the_information')
-          : error.response.data.message;
-        toast.error(message);
+      if (error.response.data.errors) {
+        error.response.data.errors.forEach((error: any) => {
+          setError(error.path[0], {});
+        });
+      } else if (error.response.data.message) {
+        toast.error(error.response.data.message);
       } else {
         toast.error(translate('messages.something_went_wrong'));
       }
