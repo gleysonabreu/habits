@@ -60,7 +60,7 @@ export default function Dashboard() {
                   <table className="text-gray-300 tabular-nums font-normal text-base w-full">
                     <thead className="text-gray-100 font-semibold text-left">
                       <tr>
-                        <th className="font-semibold text-left pr-4 pl-4 pt-3.5 whitespace-nowrap">
+                        <th className="font-semibold text-left pr-4 pl-4 pt-3.5 whitespace-nowrap hidden sm:table-cell">
                           {translate('table_habits.t_head.item1')}
                         </th>
                         <th className="font-semibold text-left pr-4 pl-4 pt-3.5 whitespace-nowrap">
@@ -82,7 +82,7 @@ export default function Dashboard() {
                             key={habit.id}
                             className="border-t border-b-0 border-gray-900/30 first:border-t-0"
                           >
-                            <td className="align-middle tabular-nums text-left p-4 whitespace-nowrap">
+                            <td className="align-middle tabular-nums text-left p-4 whitespace-nowrap hidden sm:table-cell">
                               {habit.id.substring(0, 8)}
                             </td>
                             <td className="align-middle tabular-nums text-left p-4 whitespace-nowrap">
