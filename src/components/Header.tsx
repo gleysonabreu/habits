@@ -34,7 +34,7 @@ export function Header() {
   return (
     <Disclosure
       as="header"
-      className="w-full min-h-24 lg:h-24 flex flex-col bg-gray-900 shadow-header p-3 transition-all relative"
+      className="w-full lg:h-[94px] flex flex-col bg-gray-900 shadow-header p-3 transition-all relative"
     >
       {({ open }) => (
         <>
