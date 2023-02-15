@@ -66,9 +66,6 @@ export default function Dashboard() {
                         <th className="font-semibold text-left pr-4 pl-4 pt-3.5 whitespace-nowrap">
                           {translate('table_habits.t_head.item2')}
                         </th>
-                        <th className="font-semibold text-left pr-4 pl-4 pt-3.5 whitespace-nowrap hidden lg:table-cell">
-                          {translate('table_habits.t_head.item3')}
-                        </th>
                         <th className="font-semibold text-left pr-4 pl-4 pt-3.5 whitespace-nowrap hidden sm:table-cell">
                           {translate('table_habits.t_head.item4')}
                         </th>
@@ -90,16 +87,6 @@ export default function Dashboard() {
                             </td>
                             <td className="align-middle tabular-nums text-left p-4 whitespace-nowrap">
                               {habit.title}
-                            </td>
-                            <td className="align-middle tabular-nums text-left p-4 gap-2 hidden lg:flex">
-                              {habit.tasks.slice(0, 4).map((task, index) => (
-                                <span
-                                  className="p-2 bg-gray-950 rounded-xl  whitespace-nowrap"
-                                  key={index}
-                                >
-                                  {task.name}
-                                </span>
-                              ))}
                             </td>
                             <td className="align-middle tabular-nums text-left p-4 whitespace-nowrap hidden sm:table-cell">
                               {dayjs(habit.createdAt).format('YYYY-MM-DD')}
