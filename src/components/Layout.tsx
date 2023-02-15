@@ -9,9 +9,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col mx-auto items-center justify-center min-h-screen">
       <Header />
-      <main className="flex mt-10 w-full flex-1 max-w-[1000px]">
-        {children}
-      </main>
+      <main className="flex w-full flex-1 max-w-[1000px]">{children}</main>
     </div>
   );
 }
