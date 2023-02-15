@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
 import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
@@ -11,8 +9,6 @@ import { LoadingPage } from '../components/LoadingPage';
 import { HabitsProvider } from '../contexts/HabitsContext';
 import '../libs/dayjs';
 import '../styles/main.css';
-
-dayjs.extend(isoWeek);
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [loading, setLoading] = useState<boolean>(false);
