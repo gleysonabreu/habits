@@ -7,8 +7,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { DisclosureItem } from '../components/DisclosureItem';
 import { Languages } from '../components/Languages';
-import { Logo } from '../components/Logo';
 import { api } from '../libs/axios';
+import logo from '../styles/images/logo.svg';
 
 type ProfileProps = {
   user: User & {
@@ -27,8 +27,8 @@ export default function Profile({ user }: ProfileProps) {
         <title>{title}</title>
       </Head>
       <header className="w-full min-h-20 lg:h-20 bg-gray-900 shadow-header flex items-center justify-between p-3 transition-all relative">
-        <Link href="/" className="h-9 flex items-center">
-          <Logo />
+        <Link href="/" className="flex items-center">
+          <Image src={logo} alt="Habits Brand" width={120} />
         </Link>
 
         <div className="flex gap-4 flex-col md:flex-row items-center justify-center">

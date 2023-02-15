@@ -18,6 +18,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { Languages } from '../components/Languages';
 import { LoginError, SignInErrorTypes } from '../components/LoginError';
+import logo from '../styles/images/logo.svg';
 
 type HomeProps = {
   error: SignInErrorTypes;
@@ -41,12 +42,7 @@ export default function Home(props: HomeProps) {
             <div className="flex w-full justify-between flex-col md:flex-row">
               <div className="flex flex-col self-start m-[0px_auto] lg:m-0 lg:self-center w-full max-w-120">
                 <div className="flex mb-6">
-                  <Image
-                    alt="Brand Habits"
-                    src="/logo.svg"
-                    height={60}
-                    width={132}
-                  />
+                  <Image src={logo} alt="Habits Brand" width={172} />
                 </div>
                 <h1 className="text-gray-200 mb-6 text-5xl leading-tight">
                   {session

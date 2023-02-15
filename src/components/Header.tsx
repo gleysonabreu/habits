@@ -8,11 +8,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { List, Plus, SignOut, X } from 'phosphor-react';
 import { Fragment } from 'react';
+import logo from '../styles/images/logo.svg';
 import { Button } from './Button';
 import { CreateHabitDialog } from './CreateHabitDialog';
 import { CreateTaskDialog } from './CreateTaskDialog';
 import { Languages } from './Languages';
-import { Logo } from './Logo';
 
 export function Header() {
   const router = useRouter();
@@ -39,8 +39,8 @@ export function Header() {
       {({ open }) => (
         <>
           <div className="w-full flex items-center justify-between">
-            <Link href="/" className="h-9 flex items-center">
-              <Logo />
+            <Link href="/" className="flex items-center">
+              <Image src={logo} alt="Habits Brand" width={120} />
             </Link>
 
             <nav className="hidden lg:flex">
