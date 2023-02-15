@@ -2,20 +2,21 @@ import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 import { Router } from 'next/router';
-import { useEffect, useState } from 'react';
+import nProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { LoadingPage } from '../components/LoadingPage';
 import { HabitsProvider } from '../contexts/HabitsContext';
 import '../libs/dayjs';
 import '../styles/main.css';
 
-function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const [loading, setLoading] = useState<boolean>(false);
+nProgress.configure({ showSpinner: false });
 
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   useEffect(() => {
-    const handleRouteStart = () => setLoading(true);
-    const handleRouteDone = () => setLoading(false);
+    const handleRouteStart = () => nProgress.start();
+    const handleRouteDone = () => nProgress.done();
 
     Router.events.on('routeChangeStart', handleRouteStart);
     Router.events.on('routeChangeComplete', handleRouteDone);
@@ -29,13 +30,9 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   }, []);
   return (
     <SessionProvider session={session}>
-      {loading ? (
-        <LoadingPage />
-      ) : (
-        <HabitsProvider>
-          <Component {...pageProps} />
-        </HabitsProvider>
-      )}
+      <HabitsProvider>
+        <Component {...pageProps} />
+      </HabitsProvider>
       <ToastContainer />
     </SessionProvider>
   );

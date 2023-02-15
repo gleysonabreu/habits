@@ -111,3 +111,7 @@ body {
   min-width: 44px;
   min-height: 44px;
 }
+
+#nprogress .bar {
+  @apply bg-brand-blue-mid;
+}
