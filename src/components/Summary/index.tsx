@@ -48,7 +48,7 @@ export function Summary({ id }: SummaryProps) {
   const amountOfDaysToFill =
     calendar.length - (calendar.length - totalAmountToFill);
   return (
-    <div className="w-full flex flex-1 lg:flex-none">
+    <div className="w-full flex flex-1 lg:flex- mt-10">
       <Head>
         <title>Habits</title>
       </Head>
@@ -75,7 +75,7 @@ export function Summary({ id }: SummaryProps) {
               })}
             </div>
 
-            <div className="grid grid-flow-row lg:grid-flow-col gap-2 grid-cols-7 lg:grid-cols-[none] lg:grid-rows-7">
+            <div className="grid grid-flow-row lg:grid-flow-col gap-2 grid-cols-7 lg:grid-cols-[none] lg:grid-rows-7 pb-5 lg:pb-0">
               {calendar.map(date => {
                 const convertDate = dayjs(date).utc().local();
                 const findSummaryByDate = data.find(summary => {
