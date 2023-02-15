@@ -72,7 +72,7 @@ export function CreateTaskDialog() {
     <Dialog title={translate('create_task.title')}>
       <form
         onSubmit={handleSubmit(handleCreateTask)}
-        className="mt-8 flex flex-col gap-4"
+        className="mt-8 flex flex-col gap-4 max-h-[500px] px-10"
       >
         <fieldset className="flex flex-col gap-5 mb-3">
           <label className="text-sm text-gray-200 text-left">
