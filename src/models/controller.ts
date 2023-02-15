@@ -12,7 +12,7 @@ async function onHandleError(
   }
 
   if (error instanceof ZodError) {
-    return response.status(400).json(error.errors);
+    return response.status(400).json({ errors: error.issues });
   }
 
   return response
