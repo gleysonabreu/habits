@@ -35,25 +35,16 @@ export function DisclosureItem({ habit }: DisclosureItemProps) {
   const { t: translate, i18n } = useTranslation('common');
   dayjs.locale(i18n.resolvedLanguage);
 
-  async function handleGetCalendar(state: boolean) {
-    if (state === false && summaries.length === 0) {
+  async function handleGetCalendar(stateDisclosure: boolean) {
+    if (stateDisclosure === false && summaries.length === 0) {
       try {
         setLoading(true);
         const res = await api.get(`/summary/${habit.id}`);
         setSummaries(res.data.summary);
         setLoading(false);
       } catch (error: any) {
-        if (error.response) {
-          const isArray = Array.isArray(error.response.data);
-          const message = isArray
-            ? translate('messages.fill_the_information')
-            : error.response.data.message;
-          toast.error(message);
-          setLoading(false);
-        } else {
-          toast.error(translate('messages.something_went_wrong'));
-          setLoading(false);
-        }
+        toast.error(translate('messages.something_went_wrong'));
+        setLoading(false);
       }
     }
   }
