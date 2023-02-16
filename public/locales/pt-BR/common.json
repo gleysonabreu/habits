@@ -110,5 +110,17 @@
     },
     "dashboard_box": {
       "no_habits": "Você não tem hábitos!"
+    },
+    "pages": {
+      "404": {
+        "title": "Página não encontrada",
+        "subtitle": "Um erro interno não esperado aconteceu.",
+        "button": "Retornar à tela inicial"
+      },
+      "500": {
+        "title": "Erro interno do servidor",
+        "subtitle": "Um erro interno não esperado aconteceu.",
+        "button": "Retornar à tela inicial"
+      }
     }
 }

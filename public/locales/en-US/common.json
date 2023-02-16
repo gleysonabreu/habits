@@ -110,5 +110,17 @@
     },
     "dashboard_box": {
       "no_habits": "No habits!"
+    },
+    "pages": {
+      "404": {
+        "title": "Page not found",
+        "subtitle": "An unexpected internal error has occurred.",
+        "button": "Go back home"
+      },
+      "500": {
+        "title": "Server Internal Error",
+        "subtitle": "An unexpected internal error has occurred.",
+        "button": "Go back home"
+      }
     }
 }
