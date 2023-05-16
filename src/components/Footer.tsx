@@ -1,16 +1,14 @@
 'use client';
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { FacebookLogo, GithubLogo, InstagramLogo, TwitterLogo } from "@phosphor-icons/react";
+import { FacebookLogo, InstagramLogo, TwitterLogo } from "@phosphor-icons/react";
 
 export function Footer() {
   return (
     <footer className="bg-zinc-200 dark:bg-zinc-900 w-full">
-      <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="flex justify-center">
-          <div className="scale-50">
-            <Logo />
-          </div>
+      <div className="flex items-center flex-col justify-center mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="flex items-center w-28 h-12">
+          <Logo />
         </div>
 
         <p className="mx-auto max-w-md text-center leading-relaxed text-zinc-500 dark:text-zinc-400">
