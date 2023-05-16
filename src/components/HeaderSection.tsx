@@ -73,6 +73,11 @@ export function HeaderSection() {
       const responseBody = await response.json();
 
       if (response.status === 201) {
+        setMessageRequest({
+          type: 'success',
+          title: 'Sucesso',
+          text: 'Hábito criado com sucesso!',
+        });
         router.push(`/dashboard/habit/${responseBody.habit.id}`);
       }
 
