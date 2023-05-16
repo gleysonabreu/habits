@@ -1,5 +1,5 @@
 'use client';
-import { GithubLogo, TwitchLogo } from '@phosphor-icons/react'
+import { GithubLogo, GoogleLogo, TwitchLogo } from '@phosphor-icons/react'
 import { signIn } from 'next-auth/react';
 import { Button } from "./Button";
 import { Alert } from './Alert';
@@ -52,6 +52,7 @@ export function SignIn({ error: errorType }: SignInProps) {
       <div className='flex flex-col flex-1 w-full items-center justify-center gap-4'>
         <Button onClick={() => signIn('github')} isFull size='xl'><GithubLogo size={25} weight='fill' /> Github</Button>
         <Button onClick={() => signIn('twitch')} isFull size='xl' variant='purple'><TwitchLogo size={25} weight='fill' /> Twitch</Button>
+        <Button onClick={() => signIn('google')} isFull size='xl' variant='white'><GoogleLogo size={25} weight='fill' /> Google</Button>
       </div>
     </div>
   );

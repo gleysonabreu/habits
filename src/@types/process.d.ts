@@ -7,5 +7,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_API_URL: string;
     TWITCH_ID: string;
     TWITCH_SECRET: string;
+    GOOGLE_ID: string;
+    GOOGLE_SECRET: string;
   }
 }
