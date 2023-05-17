@@ -25,6 +25,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     session: async ({ user, session }) => {
       session.user.id = user.id;
+      session.user.isPublic = user.isPublic;
 
       return session;
     }

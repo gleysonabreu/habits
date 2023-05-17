@@ -43,6 +43,7 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
+  isPublic      Boolean   @default(false) @map("is_public")
   image         String?
   accounts      Account[]
   sessions      Session[]
