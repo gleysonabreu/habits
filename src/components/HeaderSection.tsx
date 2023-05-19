@@ -208,11 +208,11 @@ export function HeaderSection() {
               />
             </Form.Field>
             <div className="flex items-center justify-between">
-              <Button type="submit" size='lg' disabled={isSubmitting} loading={isSubmitting}>
+              <Button title="Criar hábito" type="submit" size='lg' disabled={isSubmitting} loading={isSubmitting}>
                 Criar
               </Button>
 
-              <Button onClick={closeModal} type="button" size='lg' variant='red'>
+              <Button title='Cancelar' onClick={closeModal} type="button" size='lg' variant='red'>
                 Cancelar
               </Button>
             </div>
@@ -233,7 +233,7 @@ export function HeaderSection() {
           </div>
 
           <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-            <Button size="lg" variant="white" onClick={openModal}>
+            <Button title='Criar hábito' size="lg" variant="white" onClick={openModal}>
               <span className="block">Novo hábito</span>
               <Plus size={16} className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5" />
             </Button>

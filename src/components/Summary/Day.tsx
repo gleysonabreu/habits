@@ -30,7 +30,7 @@ export function Day({ habitId, date, defaultAmount = 0, defaultCompleted = 0 }: 
   }
 
   return (
-    <Popover completedPercentage={completedPercentage}>
+    <Popover date={date} completedPercentage={completedPercentage}>
       <div className='flex flex-col'>
         <span className='font-semibold capitalize text-zinc-500 dark:text-zinc-400'>{dayOfWeek}</span>
         <span className='mt-1 font-extrabold leading-tight text-3xl'>{dayAndMonth}</span>

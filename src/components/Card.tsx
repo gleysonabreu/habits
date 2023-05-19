@@ -18,12 +18,12 @@ export function Card({ id, date, title }: CardProps) {
       <div className="block rounded-xl bg-zinc-100 dark:bg-zinc-800 p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col gap-2">
           <Button asChild>
-            <Link href={`/dashboard/habit/${id}`}>
+            <Link href={`/dashboard/habit/${id}`} title="Acessar hábito">
               Acessar
               <ArrowRight size={16} className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5" />
             </Link>
           </Button>
-          <Button variant="red">
+          <Button variant="red" title='Deletar'>
             Deletar
             <Trash size={16} className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5" />
           </Button>

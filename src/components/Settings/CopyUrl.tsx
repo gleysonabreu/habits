@@ -12,7 +12,7 @@ export function CopyUrl({ url }: CopyUrlProps) {
   }
 
   return (
-    <button onClick={handleCopyUrl} type='button' className="text-brand-primary hover:text-brand-secondary transition-all">
+    <button title='Copiar?' onClick={handleCopyUrl} type='button' className="text-brand-primary hover:text-brand-secondary transition-all">
       <Copy size={25} />
     </button>
   );

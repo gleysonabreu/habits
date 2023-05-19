@@ -198,11 +198,11 @@ export function HeaderHabitDetails({ title, habitId }: HeaderHabitDetailsProps) 
             </Form.Field>
 
             <div className="flex items-center justify-between">
-              <Button type="submit" size='lg' disabled={isSubmitting} loading={isSubmitting}>
+              <Button title='Criar tarefa ou exercício' type="submit" size='lg' disabled={isSubmitting} loading={isSubmitting}>
                 Criar
               </Button>
 
-              <Button onClick={closeModal} type="button" size='lg' variant='red'>
+              <Button title='Cancelar' onClick={closeModal} type="button" size='lg' variant='red'>
                 Cancelar
               </Button>
             </div>
@@ -219,7 +219,7 @@ export function HeaderHabitDetails({ title, habitId }: HeaderHabitDetailsProps) 
           </div>
 
           <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-            <Button size="lg" variant="white" onClick={openModal}>
+            <Button title='Nova tarefa' size="lg" variant="white" onClick={openModal}>
               <span className="block">Nova tarefa</span>
               <Plus size={16} className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5" />
             </Button>

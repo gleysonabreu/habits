@@ -50,9 +50,9 @@ export function SignIn({ error: errorType }: SignInProps) {
 
       <h1 className='font-bold text-xl text-center text-zinc-800 dark:text-zinc-100'>Acesse a plataforma</h1>
       <div className='flex flex-col flex-1 w-full items-center justify-center gap-4'>
-        <Button onClick={() => signIn('github')} isFull size='xl'><GithubLogo size={25} weight='fill' /> Github</Button>
-        <Button onClick={() => signIn('twitch')} isFull size='xl' variant='purple'><TwitchLogo size={25} weight='fill' /> Twitch</Button>
-        <Button onClick={() => signIn('google')} isFull size='xl' variant='white'><GoogleLogo size={25} weight='fill' /> Google</Button>
+        <Button title='Github' onClick={() => signIn('github')} isFull size='xl'><GithubLogo size={25} weight='fill' /> Github</Button>
+        <Button title='Twitch' onClick={() => signIn('twitch')} isFull size='xl' variant='purple'><TwitchLogo size={25} weight='fill' /> Twitch</Button>
+        <Button title='Google' onClick={() => signIn('google')} isFull size='xl' variant='white'><GoogleLogo size={25} weight='fill' /> Google</Button>
       </div>
     </div>
   );

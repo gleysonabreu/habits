@@ -2,16 +2,19 @@
 import * as PopoverRadix from '@radix-ui/react-popover';
 import { ReactNode } from 'react';
 import clsx from 'clsx';
+import dayjs from 'dayjs';
 
 type PopoverProps = {
   completedPercentage: number;
   children: ReactNode;
+  date: Date;
 }
 
-export function Popover({ completedPercentage, children }: PopoverProps) {
+export function Popover({ completedPercentage, children, date }: PopoverProps) {
+  const dateFormatted = dayjs(date).format('DD/MM/YYYY');
   return (
     <PopoverRadix.Root>
-      <PopoverRadix.Trigger className={clsx('w-10 h-10 border-2 rounded-xl transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background dark:focus:ring-offset-zinc-900 focus:ring-offset-zinc-100 focus:ring-sky-600', {
+      <PopoverRadix.Trigger title={dateFormatted} className={clsx('w-10 h-10 border-2 rounded-xl transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background dark:focus:ring-offset-zinc-900 focus:ring-offset-zinc-100 focus:ring-sky-600', {
         'bg-zinc-300 border-zinc-400 dark:bg-zinc-800 dark:border-zinc-900': completedPercentage === 0,
         'bg-blue-900 border-blue-500': completedPercentage > 0 && completedPercentage < 20,
         'bg-blue-800 border-blue-500': completedPercentage >= 20 && completedPercentage < 40,
