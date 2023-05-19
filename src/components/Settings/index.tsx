@@ -217,7 +217,7 @@ export function Settings({ open, close }: SettingsProps) {
                 Nome de usuário
               </Form.Label>
               <div className="flex flex-col gap-2 md:gap-0 md:flex-row items-center justify-between p-3 border border-zinc-800/90 rounded-lg border-dashed select-none">
-                <p className="text-zinc-500 dark:text-zinc-400 truncate w-72 md:w-full">{process.env.NEXT_PUBLIC_URL}/{session?.user.username}</p>
+                <p className="text-zinc-500 dark:text-zinc-400 truncate w-72 md:w-full">{process.env.NEXT_PUBLIC_URL}/me/{session?.user.username}</p>
                 <CopyUrl url={`${process.env.NEXT_PUBLIC_URL}/me/${session?.user.username}`} />
               </div>
               <Form.ErrorMessage field="username" />
