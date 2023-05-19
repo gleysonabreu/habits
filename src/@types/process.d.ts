@@ -9,5 +9,6 @@ declare namespace NodeJS {
     TWITCH_SECRET: string;
     GOOGLE_ID: string;
     GOOGLE_SECRET: string;
+    NEXT_PUBLIC_URL: string;
   }
 }

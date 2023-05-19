@@ -26,6 +26,7 @@ export const authOptions: NextAuthOptions = {
     session: async ({ user, session }) => {
       session.user.id = user.id;
       session.user.isPublic = user.isPublic;
+      session.user.username = user.username;
 
       return session;
     }
