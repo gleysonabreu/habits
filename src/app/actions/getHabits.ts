@@ -1,17 +1,11 @@
 import { getCurrentUser } from "./getCurrentUser";
 import { prisma } from '../../libs/prismadb';
 
-export const getHabits = async () => {
+export const getHabits = async (userId: string) => {
   try {
-    const currentUser = await getCurrentUser();
-
-    if (!currentUser?.email) {
-      return null;
-    }
-
     const habits = await prisma.habit.findMany({
       where: {
-        userId: currentUser.id
+        userId,
       }
     });
 

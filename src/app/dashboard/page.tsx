@@ -20,7 +20,7 @@ export default async function Dashboard() {
     redirect('/?callbackUrl=/dashboard');
   }
 
-  const habits = await getHabits() ?? [];
+  const habits = await getHabits(session.user.id) ?? [];
 
   return (
     <main className="w-full pt-10">
