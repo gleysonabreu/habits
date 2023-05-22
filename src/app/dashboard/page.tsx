@@ -4,6 +4,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { HeaderSection } from "@/components/HeaderSection";
 import { getHabits } from "../actions/getHabits";
+import { DeleteHabit } from "@/components/DeleteHabit";
 
 export const metadata = { title: 'Hábitos | Dashboard' };
 
@@ -36,10 +37,12 @@ export default async function Dashboard() {
             {habits.map(habit => (
               <Card
                 key={habit.id}
+                url={`/dashboard/habit/${habit.id}`}
                 title={habit.title}
                 date={habit.createdAt}
-                id={habit.id}
-              />
+              >
+                <DeleteHabit id={habit.id} />
+              </Card>
             ))}
           </div>
         )}
