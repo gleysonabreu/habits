@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import z, { ZodError } from 'zod';
 import { prisma } from '../../../../../libs/prismadb';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
 
 type ContextParams = {
   params: {
@@ -11,12 +9,6 @@ type ContextParams = {
 }
 
 export async function GET(request: Request, context: ContextParams) {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    return NextResponse.json({ message: 'The user must be authenticated' }, { status: 401 });
-  }
-
   const { searchParams } = new URL(request.url);
   const dateQuery = searchParams.get('date');
   const weekDayQuery = searchParams.get('weekDay');
@@ -38,10 +30,6 @@ export async function GET(request: Request, context: ContextParams) {
 
     if (!habit) {
       return NextResponse.json({ message: 'Hábito não encontrado!' }, { status: 404 });
-    }
-
-    if (habit.userId !== session.user.id) {
-      return NextResponse.json({ message: 'Hábito não pertence a sua conta.' }, { status: 500 });
     }
 
     const possibleTasks = await prisma.task.findMany({
