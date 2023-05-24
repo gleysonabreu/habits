@@ -9,7 +9,7 @@ type HeaderProps = {
 }
 
 export function Header({ title }: HeaderProps) {
-  const [checkCopy, setCheckCopy] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const pathname = usePathname();
   const router = useRouter();
@@ -17,15 +17,15 @@ export function Header({ title }: HeaderProps) {
   function handleCopyUrl() {
     const url = `${process.env.NEXT_PUBLIC_URL}${pathname}`
     navigator.clipboard.writeText(url);
-    setCheckCopy(true);
+    setIsCopied(true);
   }
 
 
   useEffect(() => {
-    const timerClearCheckCopy = setTimeout(() => setCheckCopy(false), 5000);
+    const timerClearCheckCopy = setTimeout(() => setIsCopied(false), 5000);
 
     return () => clearTimeout(timerClearCheckCopy);
-  }, []);
+  }, [isCopied]);
 
   return (
     <header>
@@ -43,7 +43,7 @@ export function Header({ title }: HeaderProps) {
           <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
             <Button title='Nova tarefa' size="lg" variant="brand" type='button' onClick={handleCopyUrl}>
               <span className="block">Compartilhar</span>
-              {checkCopy ? (
+              {isCopied ? (
                 <Check size={16} className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5" />
               ) : (
                 <ShareFat size={16} className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5" />
