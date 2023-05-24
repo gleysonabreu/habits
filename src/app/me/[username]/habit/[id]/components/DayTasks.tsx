@@ -49,6 +49,7 @@ export function DayTaks({ habitId, date }: DayTasksProps) {
         const isCompleted = dayTasksList.completedTasks.includes(dayTask.id);
         return (
           <CheckboxRadix.Root
+            key={dayTask.id}
             className='flex items-center gap-3 group focus:outline-none disabled:cursor-not-allowed'
             defaultChecked={isCompleted}
             disabled
