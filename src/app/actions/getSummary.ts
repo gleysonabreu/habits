@@ -1,14 +1,7 @@
-import { getCurrentUser } from "./getCurrentUser";
 import { prisma } from '../../libs/prismadb';
 
 export const getSummary = async (habitId: string) => {
   try {
-    const currentUser = await getCurrentUser();
-
-    if (!currentUser?.email) {
-      return null;
-    }
-
     const summary = await prisma.$queryRaw<
       { id: string; date: Date; completed: number; amount: number }[]
     >`
