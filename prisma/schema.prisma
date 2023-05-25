@@ -97,7 +97,7 @@ model TaskWeekDays {
 
 model Day {
   id       String    @id @default(cuid())
-  date     DateTime
+  date     DateTime  @unique
   dayTasks DayTask[]
 
   @@index([date])
