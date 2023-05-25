@@ -1,6 +1,8 @@
 import { getFourAvatars } from '@/app/actions/getFourAvatars';
 import { FloatingCard } from './FloatingCard';
 
+export const revalidate = 60 * 60 * 24; // 1 day
+
 export async function HomeAvatars() {
   const users = await getFourAvatars();
 
