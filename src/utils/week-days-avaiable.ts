@@ -1,4 +1,4 @@
-export const weekDaysAvaiable = [
+export const weekDaysAvailable = [
   'Domingo',
   'Segunda-Feira',
   'Terça-Feira',

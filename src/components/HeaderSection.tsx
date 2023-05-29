@@ -12,8 +12,8 @@ import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Alert, AlertProps } from "./Alert";
 import { Form } from "./Form";
-import { weekDaysAvaiable } from "@/utils/week-days-avaiable";
 import { useRouter } from 'next/navigation';
+import { weekDaysAvailable } from "@/utils/week-days-avaiable";
 
 type CreateHabitProps = {
   title: string;
@@ -187,7 +187,7 @@ export function HeaderSection() {
                     className="grid md:grid-cols-2 grid-cols-1 gap-2"
                     type="multiple"
                   >
-                    {weekDaysAvaiable.map((_weekDay, index) => {
+                    {weekDaysAvailable.map((_weekDay, index) => {
                       const weekDayName = dayjs().weekday(index).format('dddd');
 
                       return (

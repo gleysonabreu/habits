@@ -11,7 +11,7 @@ import { Controller, FormProvider, SubmitHandler, useForm } from "react-hook-for
 import dayjs from "dayjs";
 import { ToggleItem } from "./ToggleItem";
 import { Form } from "./Form";
-import { weekDaysAvaiable } from "@/utils/week-days-avaiable";
+import { weekDaysAvailable } from "@/utils/week-days-avaiable";
 
 type HeaderHabitDetailsProps = {
   title: string;
@@ -176,7 +176,7 @@ export function HeaderHabitDetails({ title, habitId }: HeaderHabitDetailsProps) 
                     className="grid md:grid-cols-2 grid-cols-1 gap-2"
                     type="multiple"
                   >
-                    {weekDaysAvaiable.map((_weekDay, index) => {
+                    {weekDaysAvailable.map((_weekDay, index) => {
                       const weekDayName = dayjs().weekday(index).format('dddd');
 
                       return (
