@@ -2,16 +2,7 @@
 import { generateDates } from "@/utils/generate-dates";
 import dayjs from "dayjs";
 import { Day } from "./Day";
-
-const daysOfTheWeek = [
-  'D',
-  'S',
-  'T',
-  'Q',
-  'Q',
-  'S',
-  'S',
-];
+import { daysOfWeek } from "@/utils/days-of-week";
 
 type Summary = {
   id: string;
@@ -33,7 +24,7 @@ export function Summary({ summary, habit }: SummaryProps) {
   return (
     <div className='w-full flex flex-col lg:flex-row gap-3 items-center justify-center'>
       <div className='grid grid-cols-7 lg:grid-cols-none lg:grid-rows-7 grid-flow-col lg:grid-flow-row gap-1'>
-        {daysOfTheWeek.map((weekDay, index) => (
+        {daysOfWeek.map((weekDay, index) => (
           <div key={index} className='h-10 w-10 lg:h-5 lg:w-5 lg:rounded-md font-bold lg:text-xs flex items-center justify-center text-zinc-100 bg-brand-primary rounded-xl border-2 border-brand-secondary'>
             {weekDay}
           </div>
