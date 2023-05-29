@@ -1,10 +1,6 @@
 import { generateDates } from "@/utils/generate-dates";
 
 const summaryDates = generateDates();
-const minSummaryDatesSize = 18 * 7; // 18 weeks
-const amountOfDaysToFill = minSummaryDatesSize - summaryDates.length;
-
-
 
 export default function Loading() {
   return (
@@ -24,24 +20,18 @@ export default function Loading() {
           </div>
         </header>
         <div className='w-full flex flex-col lg:flex-row gap-3 items-center justify-center'>
-          <div className='grid grid-cols-7 lg:grid-cols-none lg:grid-rows-7 grid-flow-col lg:grid-flow-row gap-3'>
+          <div className='grid grid-cols-7 lg:grid-cols-none lg:grid-rows-7 grid-flow-col lg:grid-flow-row gap-1'>
             {[...Array(7).keys()].map(i => (
-              <div key={i} className='animate-pulse h-10 w-10 font-bold flex items-center justify-center text-zinc-100 bg-brand-primary rounded-xl'>
+              <div key={i} className='animate-pulse h-10 w-10 lg:h-5 lg:w-5 rounded-xl lg:rounded-md lg:text-xs font-bold flex items-center justify-center text-zinc-100 bg-brand-primary'>
                 <p className="sr-only">week day</p>
               </div>
             ))}
           </div>
 
-          <div className='grid grid-flow-row lg:grid-flow-col grid-cols-7 lg:grid-cols-none lg:grid-rows-7 gap-3'>
+          <div className='grid grid-flow-row lg:grid-flow-col grid-cols-7 lg:grid-cols-none lg:grid-rows-7 gap-1'>
             {summaryDates.map(date => (
-              <div key={date.toString()} className='animate-pulse w-10 h-10 bg-zinc-200 dark:bg-zinc-900 rounded-xl transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background dark:focus:ring-offset-zinc-900 focus:ring-offset-zinc-100 focus:ring-sky-600' />
+              <div key={date.toString()} className='animate-pulse h-10 w-10 lg:h-5 lg:w-5 rounded-xl lg:rounded-md bg-zinc-200 dark:bg-zinc-900 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background dark:focus:ring-offset-zinc-900 focus:ring-offset-zinc-100 focus:ring-sky-600' />
             ))}
-
-            {amountOfDaysToFill > 0 && Array.from({ length: amountOfDaysToFill }).map((_, i) => {
-              return (
-                <div key={i} className="animate-pulse w-10 h-10 bg-zinc-200 dark:bg-zinc-900 rounded-xl" />
-              )
-            })}
           </div>
         </div>
       </div>

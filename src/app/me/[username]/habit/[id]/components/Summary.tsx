@@ -29,20 +29,18 @@ type SummaryProps = {
 
 export function Summary({ summary, habit }: SummaryProps) {
   const summaryDates = generateDates();
-  const minSummaryDatesSize = 18 * 7; // 18 weeks
-  const amountOfDaysToFill = minSummaryDatesSize - summaryDates.length;
 
   return (
     <div className='w-full flex flex-col lg:flex-row gap-3 items-center justify-center'>
-      <div className='grid grid-cols-7 lg:grid-cols-none lg:grid-rows-7 grid-flow-col lg:grid-flow-row gap-3'>
+      <div className='grid grid-cols-7 lg:grid-cols-none lg:grid-rows-7 grid-flow-col lg:grid-flow-row gap-1'>
         {daysOfTheWeek.map((weekDay, index) => (
-          <div key={index} className='h-10 w-10 font-bold flex items-center justify-center text-zinc-100 bg-brand-primary rounded-xl border-2 border-brand-secondary'>
+          <div key={index} className='h-10 w-10 lg:h-5 lg:w-5 lg:rounded-md font-bold lg:text-xs flex items-center justify-center text-zinc-100 bg-brand-primary rounded-xl border-2 border-brand-secondary'>
             {weekDay}
           </div>
         ))}
       </div>
 
-      <div className='grid grid-flow-row lg:grid-flow-col grid-cols-7 lg:grid-cols-none lg:grid-rows-7 gap-3'>
+      <div className='grid grid-flow-row lg:grid-flow-col grid-cols-7 lg:grid-cols-none lg:grid-rows-7 gap-1'>
         {summaryDates.map((date, index) => {
           const dayInSummary = summary.find(day => {
             const formattedDate = dayjs(date).format('YYYY-MM-DD');
@@ -60,12 +58,6 @@ export function Summary({ summary, habit }: SummaryProps) {
               habitId={habit.id}
             />
           );
-        })}
-
-        {amountOfDaysToFill > 0 && Array.from({ length: amountOfDaysToFill }).map((_, i) => {
-          return (
-            <div key={i} className="w-10 h-10 bg-zinc-300 border-zinc-400 dark:bg-zinc-800 dark:border-zinc-900 border-2 rounded-xl opacity-40 cursor-not-allowed" />
-          )
         })}
       </div>
     </div>
