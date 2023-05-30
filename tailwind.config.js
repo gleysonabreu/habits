@@ -27,32 +27,35 @@ module.exports = {
       },
       animation: {
         slideUpAndFade: 'slideUpAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
-        slideDownAndFade: 'slideDownAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
-        slideRightAndFade: 'slideRightAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
-        slideLeftAndFade: 'slideLeftAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
+        slideDownAndFade:
+          'slideDownAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
+        slideRightAndFade:
+          'slideRightAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
+        slideLeftAndFade:
+          'slideLeftAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
       },
       gridTemplateRows: {
-        7: 'repeat(7, minmax(0, 1fr))'
+        7: 'repeat(7, minmax(0, 1fr))',
       },
       colors: {
         brand: {
-          primary: "#3485FF",
-          secondary: "#5699FF",
-          green: "#2bc253"
+          primary: '#3485FF',
+          secondary: '#5699FF',
+          green: '#2bc253',
         },
         zinc: {
-          900: "#18181B",
-          800: "#27272A",
-          700: "#3F3F46",
-          600: "#52525B",
-          500: "#71717A",
-          400: "#A1A1AA",
-          300: "#D4D4D8",
-          200: "#E4E4E7",
-          100: "#F4F4F5"
-        }
-      }
+          900: '#18181B',
+          800: '#27272A',
+          700: '#3F3F46',
+          600: '#52525B',
+          500: '#71717A',
+          400: '#A1A1AA',
+          300: '#D4D4D8',
+          200: '#E4E4E7',
+          100: '#F4F4F5',
+        },
+      },
     },
   },
   plugins: ['@tailwindcss/forms'],
-}
+};

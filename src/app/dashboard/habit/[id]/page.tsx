@@ -8,20 +8,21 @@ import { getHabit } from '@/app/actions/getHabit';
 import { SummaryList } from '@/components/Summary';
 import { SummaryInfo } from '@/components/Summary/SummaryInfo';
 
-
 type SummaryPropsPage = {
   params: {
     id: string;
-  }
-}
+  };
+};
 
-export async function generateMetadata({ params }: SummaryPropsPage): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: SummaryPropsPage): Promise<Metadata> {
   const habit = await getHabit(params.id);
 
   return {
     title: `${habit?.title} | Sumário`,
     description: `Veja a linha do tempo de ${habit?.title} e acompanhe seu progresso.`,
-  }
+  };
 }
 
 export default async function Summary({ params }: SummaryPropsPage) {
@@ -31,7 +32,7 @@ export default async function Summary({ params }: SummaryPropsPage) {
     redirect(`/?callbackUrl=/dashboard/habit/${params.id}`);
   }
 
-  const summary = await getSummary(params.id) ?? [];
+  const summary = (await getSummary(params.id)) ?? [];
 
   if (!summary) {
     notFound();
@@ -47,7 +48,7 @@ export default async function Summary({ params }: SummaryPropsPage) {
     <main className="w-full pt-16">
       <div className="max-w-screen-2xl mx-auto mt-5 mb-6">
         <HeaderHabitDetails title={habit.title} habitId={habit.id} />
-        <div className='flex flex-col gap-5 items-center lg:items-end'>
+        <div className="flex flex-col gap-5 items-center lg:items-end">
           <SummaryList summary={summary} habit={habit} />
           <SummaryInfo />
         </div>

@@ -11,11 +11,17 @@ type CheckboxProps = {
   isCompleted: boolean;
   date: Date;
   handleCompleted: (taskId: string) => void;
-}
+};
 
 type Message = AlertProps;
 
-export function Checkbox({ taskId, date, taskName, isCompleted, handleCompleted }: CheckboxProps) {
+export function Checkbox({
+  taskId,
+  date,
+  taskName,
+  isCompleted,
+  handleCompleted,
+}: CheckboxProps) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<Message | null>(null);
 
@@ -83,36 +89,32 @@ export function Checkbox({ taskId, date, taskName, isCompleted, handleCompleted 
       setMessage({
         title: 'Erro',
         type: 'danger',
-        text: 'Não foi possível se conectar ao Hábitos. Por favor, verifique sua conexão.'
+        text: 'Não foi possível se conectar ao Hábitos. Por favor, verifique sua conexão.',
       });
       setLoading(false);
     }
   }
 
   if (loading) {
-    return (
-      <LoadingCheckBox />
-    );
+    return <LoadingCheckBox />;
   }
 
   return (
     <>
-      {message && (
-        <Alert {...message} />
-      )}
+      {message && <Alert {...message} />}
       <CheckboxRadix.Root
         onClick={handleToggleCompleted}
-        className='flex items-center gap-3 group focus:outline-none disabled:cursor-not-allowed'
+        className="flex items-center gap-3 group focus:outline-none disabled:cursor-not-allowed"
         defaultChecked={isCompleted}
         disabled={past}
       >
-        <div className='group-focus:ring-2 group-focus:ring-brand-primary h-8 w-8 rounded-xl flex items-center justify-center bg-zinc-300 dark:bg-zinc-900 border-2 border-zinc-400 dark:border-zinc-800 group-data-[state=checked]:bg-brand-green group-data-[state=checked]:border-green-200'>
+        <div className="group-focus:ring-2 group-focus:ring-brand-primary h-8 w-8 rounded-xl flex items-center justify-center bg-zinc-300 dark:bg-zinc-900 border-2 border-zinc-400 dark:border-zinc-800 group-data-[state=checked]:bg-brand-green group-data-[state=checked]:border-green-200">
           <CheckboxRadix.Indicator>
-            <Check size={20} className='text-white' />
+            <Check size={20} className="text-white" />
           </CheckboxRadix.Indicator>
         </div>
 
-        <span className='font-semibold text-xl text-zinc-400 dark:text-zinc-500 leading-tight group-data-[state=checked]:line-through group-data-[state=checked]:text-zinc-400'>
+        <span className="font-semibold text-xl text-zinc-400 dark:text-zinc-500 leading-tight group-data-[state=checked]:line-through group-data-[state=checked]:text-zinc-400">
           {taskName}
         </span>
       </CheckboxRadix.Root>

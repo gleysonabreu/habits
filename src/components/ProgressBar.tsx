@@ -2,7 +2,7 @@ import * as Progress from '@radix-ui/react-progress';
 
 type ProgressBarProps = {
   progress: number;
-}
+};
 
 export function ProgressBar({ progress }: ProgressBarProps) {
   return (

@@ -6,9 +6,14 @@ type ModalProps = {
   isOpen: boolean;
   closeModal: () => void;
   title: string;
-}
+};
 
-export default function Modal({ isOpen, closeModal, children, title }: ModalProps) {
+export default function Modal({
+  isOpen,
+  closeModal,
+  children,
+  title,
+}: ModalProps) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={closeModal}>
@@ -51,6 +56,5 @@ export default function Modal({ isOpen, closeModal, children, title }: ModalProp
         </div>
       </Dialog>
     </Transition>
-  )
+  );
 }
-

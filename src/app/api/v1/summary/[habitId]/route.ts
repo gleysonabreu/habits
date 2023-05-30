@@ -5,8 +5,8 @@ import { prisma } from '../../../../../libs/prismadb';
 type ContextParams = {
   params: {
     habitId: string;
-  }
-}
+  };
+};
 
 export async function GET(_request: Request, context: ContextParams) {
   try {
@@ -43,7 +43,7 @@ export async function GET(_request: Request, context: ContextParams) {
     FROM days D
     `;
 
-    const filteredSummary = summary.map(item => {
+    const filteredSummary = summary.map((item) => {
       return {
         ...item,
         completed: Number(item.completed),
@@ -58,6 +58,9 @@ export async function GET(_request: Request, context: ContextParams) {
     }
 
     console.log(err);
-    return NextResponse.json({ message: `Internal Server Error: ${err.message}` }, { status: 500 });
+    return NextResponse.json(
+      { message: `Internal Server Error: ${err.message}` },
+      { status: 500 },
+    );
   }
 }

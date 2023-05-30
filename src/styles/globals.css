@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 ::-webkit-scrollbar {
   width: 6px;
   height: 0;
 }
 
-::-webkit-scrollbar, ::-webkit-scrollbar-track {
+::-webkit-scrollbar,
+::-webkit-scrollbar-track {
   @apply bg-zinc-100 dark:bg-zinc-900;
 }
 

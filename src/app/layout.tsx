@@ -10,9 +10,12 @@ const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  async function SWRFetcher(resource: RequestInfo | URL, init: RequestInit | undefined) {
+  async function SWRFetcher(
+    resource: RequestInfo | URL,
+    init: RequestInit | undefined,
+  ) {
     const response = await fetch(resource, init);
     const responseBody = await response.json();
 
@@ -22,15 +25,15 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel='icon' type="image/x-icon" href='/favicon.png' />
+        <link rel="icon" type="image/x-icon" href="/favicon.png" />
       </head>
-      <body className={`${inter.className} text-zinc-800 dark:text-zinc-100 bg-white dark:bg-[#121212]`}>
-        <SWRConfig value={{ fetcher: SWRFetcher }} >
-          <Provider>
-            {children}
-          </Provider>
+      <body
+        className={`${inter.className} text-zinc-800 dark:text-zinc-100 bg-white dark:bg-[#121212]`}
+      >
+        <SWRConfig value={{ fetcher: SWRFetcher }}>
+          <Provider>{children}</Provider>
         </SWRConfig>
       </body>
     </html>
-  )
+  );
 }

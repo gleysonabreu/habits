@@ -11,9 +11,9 @@ type HoverCardProps = {
     image: string | null;
     _count: {
       habits: number;
-    }
-  }
-}
+    };
+  };
+};
 
 export function FloatingCard({ user }: HoverCardProps) {
   return (
@@ -44,13 +44,24 @@ export function FloatingCard({ user }: HoverCardProps) {
             />
             <div className="flex flex-col gap-[15px]">
               <div>
-                <div className="text-mauve12 m-0 text-[15px] font-medium leading-[1.5]">{user.name}</div>
-                <Link href={`/me/${user.username}`} className="text-mauve10 m-0 text-[15px] leading-[1.5] hover:text-brand-primary transition-colors">@{user.username}</Link>
+                <div className="text-mauve12 m-0 text-[15px] font-medium leading-[1.5]">
+                  {user.name}
+                </div>
+                <Link
+                  href={`/me/${user.username}`}
+                  className="text-mauve10 m-0 text-[15px] leading-[1.5] hover:text-brand-primary transition-colors"
+                >
+                  @{user.username}
+                </Link>
               </div>
               <div className="flex gap-[15px]">
                 <div className="flex gap-[5px]">
-                  <div className="text-mauve12 m-0 text-[15px] leading-[1.5] text-brand-primary font-bold">{user._count.habits}</div>
-                  <div className="text-mauve10 m-0 text-[15px] leading-[1.5]">Hábitos</div>
+                  <div className="text-mauve12 m-0 text-[15px] leading-[1.5] text-brand-primary font-bold">
+                    {user._count.habits}
+                  </div>
+                  <div className="text-mauve10 m-0 text-[15px] leading-[1.5]">
+                    Hábitos
+                  </div>
                 </div>
               </div>
             </div>

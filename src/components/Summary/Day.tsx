@@ -10,13 +10,19 @@ type DayProps = {
   defaultCompleted?: number;
   defaultAmount?: number;
   habitId: string;
-}
+};
 
-export function Day({ habitId, date, defaultAmount = 0, defaultCompleted = 0 }: DayProps) {
+export function Day({
+  habitId,
+  date,
+  defaultAmount = 0,
+  defaultCompleted = 0,
+}: DayProps) {
   const [completed, setCompleted] = useState(defaultCompleted);
   const [amount, setAmount] = useState(defaultAmount);
 
-  const completedPercentage = amount > 0 ? Math.round((completed / amount) * 100) : 0;
+  const completedPercentage =
+    amount > 0 ? Math.round((completed / amount) * 100) : 0;
 
   const dayAndMonth = dayjs(date).format('DD/MM');
   const dayOfWeek = dayjs(date).format('dddd');
@@ -31,13 +37,22 @@ export function Day({ habitId, date, defaultAmount = 0, defaultCompleted = 0 }: 
 
   return (
     <Popover date={date} completedPercentage={completedPercentage}>
-      <div className='flex flex-col'>
-        <span className='font-semibold capitalize text-zinc-500 dark:text-zinc-400'>{dayOfWeek}</span>
-        <span className='mt-1 font-extrabold leading-tight text-3xl'>{dayAndMonth}</span>
+      <div className="flex flex-col">
+        <span className="font-semibold capitalize text-zinc-500 dark:text-zinc-400">
+          {dayOfWeek}
+        </span>
+        <span className="mt-1 font-extrabold leading-tight text-3xl">
+          {dayAndMonth}
+        </span>
       </div>
 
       <ProgressBar progress={completedPercentage} />
-      <DayTaks habitId={habitId} date={date} handleCompleted={handleCompletedChaged} handleAmount={onChangeAmount} />
+      <DayTaks
+        habitId={habitId}
+        date={date}
+        handleCompleted={handleCompletedChaged}
+        handleAmount={onChangeAmount}
+      />
     </Popover>
   );
 }

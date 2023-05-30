@@ -6,7 +6,7 @@ export const getFourAvatars = async () => {
       where: {
         NOT: [
           {
-            username: null
+            username: null,
           },
         ],
         isPublic: true,
@@ -15,8 +15,8 @@ export const getFourAvatars = async () => {
         _count: {
           select: {
             habits: true,
-          }
-        }
+          },
+        },
       },
       take: 4,
     });
@@ -26,4 +26,4 @@ export const getFourAvatars = async () => {
     console.log(error);
     return null;
   }
-}
+};

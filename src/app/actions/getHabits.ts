@@ -1,4 +1,4 @@
-import { getCurrentUser } from "./getCurrentUser";
+import { getCurrentUser } from './getCurrentUser';
 import { prisma } from '../../libs/prismadb';
 
 export const getHabits = async (userId: string) => {
@@ -6,7 +6,7 @@ export const getHabits = async (userId: string) => {
     const habits = await prisma.habit.findMany({
       where: {
         userId,
-      }
+      },
     });
 
     return habits;
@@ -14,4 +14,4 @@ export const getHabits = async (userId: string) => {
     console.log(error);
     return null;
   }
-}
+};

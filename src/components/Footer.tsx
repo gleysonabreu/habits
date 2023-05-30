@@ -1,7 +1,11 @@
 'use client';
-import Link from "next/link";
-import { Logo } from "./Logo";
-import { FacebookLogo, InstagramLogo, TwitterLogo } from "@phosphor-icons/react";
+import Link from 'next/link';
+import { Logo } from './Logo';
+import {
+  FacebookLogo,
+  InstagramLogo,
+  TwitterLogo,
+} from '@phosphor-icons/react';
 
 export function Footer() {
   return (

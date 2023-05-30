@@ -5,9 +5,8 @@ export const getUserByUsername = async (username: string) => {
     const user = await prisma.user.findUnique({
       where: {
         username,
-      }
+      },
     });
-
 
     if (!user) {
       return null;
@@ -17,4 +16,4 @@ export const getUserByUsername = async (username: string) => {
   } catch (error) {
     return null;
   }
-}
+};

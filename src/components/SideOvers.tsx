@@ -1,16 +1,15 @@
-import { Fragment, ReactNode } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { X } from '@phosphor-icons/react'
+import { Fragment, ReactNode } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { X } from '@phosphor-icons/react';
 
 type SideOversProps = {
   open: boolean;
   onClose: (open: boolean) => void;
   title: string;
   children: ReactNode;
-}
+};
 
 export function SideOvers({ open, onClose, title, children }: SideOversProps) {
-
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={onClose}>
@@ -74,5 +73,5 @@ export function SideOvers({ open, onClose, title, children }: SideOversProps) {
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

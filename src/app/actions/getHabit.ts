@@ -4,8 +4,8 @@ export const getHabit = async (habitId: string) => {
   try {
     const habit = await prisma.habit.findUnique({
       where: {
-        id: habitId
-      }
+        id: habitId,
+      },
     });
 
     if (!habit) {
@@ -17,4 +17,4 @@ export const getHabit = async (habitId: string) => {
     console.log(error);
     return null;
   }
-}
+};

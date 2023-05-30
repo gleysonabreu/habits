@@ -1,6 +1,6 @@
-import { LabelHTMLAttributes } from "react";
+import { LabelHTMLAttributes } from 'react';
 
-type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & {}
+type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & {};
 
 export function Label(props: LabelProps) {
   return (

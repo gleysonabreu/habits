@@ -12,10 +12,9 @@ export const getCurrentUser = async () => {
 
     const currentUser = await prisma.user.findUnique({
       where: {
-        email: session.user.email
-      }
+        email: session.user.email,
+      },
     });
-
 
     if (!currentUser) {
       return null;
@@ -25,4 +24,4 @@ export const getCurrentUser = async () => {
   } catch (error) {
     return null;
   }
-}
+};

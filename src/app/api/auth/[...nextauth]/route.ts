@@ -29,15 +29,14 @@ export const authOptions: NextAuthOptions = {
       session.user.username = user.username;
 
       return session;
-    }
+    },
   },
   pages: {
     signIn: '/',
     signOut: '/',
-    error: '/'
-  }
-}
+    error: '/',
+  },
+};
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
-

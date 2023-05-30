@@ -1,25 +1,30 @@
 'use client';
-import { Button } from "@/components/Button";
-import { Plus } from "@phosphor-icons/react";
-import { useSession } from "next-auth/react";
-import Modal from "./Modal";
-import { useState } from "react";
+import { Button } from '@/components/Button';
+import { Plus } from '@phosphor-icons/react';
+import { useSession } from 'next-auth/react';
+import Modal from './Modal';
+import { useState } from 'react';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import dayjs from "dayjs";
-import { ToggleItem } from "./ToggleItem";
-import { Controller, FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import dayjs from 'dayjs';
+import { ToggleItem } from './ToggleItem';
+import {
+  Controller,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Alert, AlertProps } from "./Alert";
-import { Form } from "./Form";
+import { Alert, AlertProps } from './Alert';
+import { Form } from './Form';
 import { useRouter } from 'next/navigation';
-import { weekDaysAvailable } from "@/utils/week-days-avaiable";
+import { weekDaysAvailable } from '@/utils/week-days-avaiable';
 
 type CreateHabitProps = {
   title: string;
   tasks: string;
   weekDays: string[];
-}
+};
 
 type MessageRequest = AlertProps;
 
@@ -28,19 +33,52 @@ export function HeaderSection() {
   const { data: session } = useSession();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [messageRequest, setMessageRequest] = useState<MessageRequest | null>(null);
+  const [messageRequest, setMessageRequest] = useState<MessageRequest | null>(
+    null,
+  );
 
   const schema = z.object({
-    title: z.string({ required_error: 'Você deve digitar algum título' }).nonempty({ message: 'Você deve digitar algum título' }).min(3, { message: 'O título deve conter pelo menos 3 caracteres' }).max(15, { message: "O título deve conter no máximo 15 caracteres" }),
-    tasks: z.string({ required_error: 'Você deve digtar pelo menos um exercício ou tarefa.' }).nonempty({ message: 'Você deve digtar pelo menos um exercício ou tarefa.' }).min(3, { message: 'A tarefa ou exercício deve conter pelo menos 3 caracteres' }),
-    weekDays: z.array(z.string().min(0, { message: "Selecione um dia da semana de segunda a sexta." }).max(6, { message: "Selecione um dia da semana de segunda a sexta." }), { required_error: 'Você deve selecionar pelo menos um dia da semana.' }).nonempty({ message: 'Você deve selecionar pelo menos um dia da semana.' }),
+    title: z
+      .string({ required_error: 'Você deve digitar algum título' })
+      .nonempty({ message: 'Você deve digitar algum título' })
+      .min(3, { message: 'O título deve conter pelo menos 3 caracteres' })
+      .max(15, { message: 'O título deve conter no máximo 15 caracteres' }),
+    tasks: z
+      .string({
+        required_error: 'Você deve digtar pelo menos um exercício ou tarefa.',
+      })
+      .nonempty({
+        message: 'Você deve digtar pelo menos um exercício ou tarefa.',
+      })
+      .min(3, {
+        message: 'A tarefa ou exercício deve conter pelo menos 3 caracteres',
+      }),
+    weekDays: z
+      .array(
+        z
+          .string()
+          .min(0, { message: 'Selecione um dia da semana de segunda a sexta.' })
+          .max(6, {
+            message: 'Selecione um dia da semana de segunda a sexta.',
+          }),
+        { required_error: 'Você deve selecionar pelo menos um dia da semana.' },
+      )
+      .nonempty({
+        message: 'Você deve selecionar pelo menos um dia da semana.',
+      }),
   });
 
   const createHabitForm = useForm<CreateHabitProps>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
   });
 
-  const { handleSubmit, formState: { isSubmitting }, reset, setError, control } = createHabitForm;
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+    reset,
+    setError,
+    control,
+  } = createHabitForm;
 
   function clearErrors() {
     setMessageRequest(null);
@@ -48,27 +86,33 @@ export function HeaderSection() {
 
   const handleAddHabit: SubmitHandler<CreateHabitProps> = async (data) => {
     try {
-      const tasks = data.tasks.split(',')
-        .map(task => task.trim());
+      const tasks = data.tasks.split(',').map((task) => task.trim());
 
-      if (!tasks.every(task => task.length >= 3)) {
-        setError('tasks', { type: 'custom', message: 'Alguma(s) tarefa(s) ou exercício(s) estão inválidos. Todos devem conter entre 3 e 15 caracteres.' }, { shouldFocus: true });
+      if (!tasks.every((task) => task.length >= 3)) {
+        setError(
+          'tasks',
+          {
+            type: 'custom',
+            message:
+              'Alguma(s) tarefa(s) ou exercício(s) estão inválidos. Todos devem conter entre 3 e 15 caracteres.',
+          },
+          { shouldFocus: true },
+        );
         return;
-      };
+      }
 
       const response = await fetch('/api/v1/habits', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           tasks,
           title: data.title,
-          weekDays: data.weekDays.map(Number)
+          weekDays: data.weekDays.map(Number),
         }),
       });
-
 
       const responseBody = await response.json();
 
@@ -120,7 +164,7 @@ export function HeaderSection() {
       setMessageRequest({
         text: 'Não foi possível se conectar ao Hábitos. Por favor, verifique sua conexão.',
         title: 'Erro',
-        type: 'danger'
+        type: 'danger',
       });
     }
   };
@@ -139,14 +183,19 @@ export function HeaderSection() {
     <header>
       <Modal title="Criar hábito" isOpen={isModalOpen} closeModal={closeModal}>
         <FormProvider {...createHabitForm}>
-          <form onSubmit={handleSubmit(handleAddHabit)} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form
+            onSubmit={handleSubmit(handleAddHabit)}
+            className="mx-auto mb-0 mt-8 max-w-md space-y-4"
+          >
             {messageRequest && (
-              <Alert type={messageRequest.type} text={messageRequest.text} title={messageRequest.title} />
+              <Alert
+                type={messageRequest.type}
+                text={messageRequest.text}
+                title={messageRequest.title}
+              />
             )}
             <Form.Field>
-              <Form.Label htmlFor="title">
-                Título
-              </Form.Label>
+              <Form.Label htmlFor="title">Título</Form.Label>
               <Form.ErrorMessage field="title" />
               <Form.Input
                 name="title"
@@ -157,10 +206,11 @@ export function HeaderSection() {
             </Form.Field>
 
             <Form.Field>
-              <Form.Label htmlFor="tasks">
-                Exercios ou Tarefas
-              </Form.Label>
-              <p className='text-sm text-zinc-600'>Para adicionar mais de 1 exercício útilize a vírgula(,): beber 2L água, dormir....</p>
+              <Form.Label htmlFor="tasks">Exercios ou Tarefas</Form.Label>
+              <p className="text-sm text-zinc-600">
+                Para adicionar mais de 1 exercício útilize a vírgula(,): beber
+                2L água, dormir....
+              </p>
               <Form.ErrorMessage field="tasks" />
               <Form.Input
                 name="tasks"
@@ -171,10 +221,10 @@ export function HeaderSection() {
             </Form.Field>
 
             <Form.Field>
-              <Form.Label htmlFor="weekDays">
-                Dias da semana
-              </Form.Label>
-              <p className='text-sm text-zinc-600'>Selecione os dias da semana dos seus exercícios.</p>
+              <Form.Label htmlFor="weekDays">Dias da semana</Form.Label>
+              <p className="text-sm text-zinc-600">
+                Selecione os dias da semana dos seus exercícios.
+              </p>
               <Form.ErrorMessage field="weekDays" />
               <Controller
                 control={control}
@@ -193,7 +243,9 @@ export function HeaderSection() {
                       return (
                         <div key={index} className="flex items-center gap-2">
                           <ToggleItem
-                            isChecked={field.value?.includes(index.toString()) ?? false}
+                            isChecked={
+                              field.value?.includes(index.toString()) ?? false
+                            }
                             value={index.toString()}
                             title={weekDayName}
                           />
@@ -208,11 +260,23 @@ export function HeaderSection() {
               />
             </Form.Field>
             <div className="flex items-center justify-between">
-              <Button title="Criar hábito" type="submit" size='lg' disabled={isSubmitting} loading={isSubmitting}>
+              <Button
+                title="Criar hábito"
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+                loading={isSubmitting}
+              >
                 Criar
               </Button>
 
-              <Button title='Cancelar' onClick={closeModal} type="button" size='lg' variant='red'>
+              <Button
+                title="Cancelar"
+                onClick={closeModal}
+                type="button"
+                size="lg"
+                variant="red"
+              >
                 Cancelar
               </Button>
             </div>
@@ -233,9 +297,17 @@ export function HeaderSection() {
           </div>
 
           <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-            <Button title='Criar hábito' size="lg" variant="white" onClick={openModal}>
+            <Button
+              title="Criar hábito"
+              size="lg"
+              variant="white"
+              onClick={openModal}
+            >
               <span className="block">Novo hábito</span>
-              <Plus size={16} className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5" />
+              <Plus
+                size={16}
+                className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5"
+              />
             </Button>
           </div>
         </div>

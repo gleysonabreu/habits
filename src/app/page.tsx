@@ -2,7 +2,7 @@ import { Logo } from '@/components/Logo';
 import { SignIn, SignInErrorTypes } from '@/components/SignIn';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/route';
-import Link from 'next/link'
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Footer } from '@/components/Footer';
 import { HomeAvatars } from '@/components/HomeAvatars';
@@ -26,9 +26,9 @@ export default async function Home({
 
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      <div className='flex flex-col md:flex-row items-center flex-1 justify-center md:justify-between p-7 md:p-24 gap-10 md:gap-5'>
-        <div className='w-full flex items-center justify-center flex-col gap-2'>
-          <Link href='/' className='hover:opacity-80 scale-75 md:scale-100'>
+      <div className="flex flex-col md:flex-row items-center flex-1 justify-center md:justify-between p-7 md:p-24 gap-10 md:gap-5">
+        <div className="w-full flex items-center justify-center flex-col gap-2">
+          <Link href="/" className="hover:opacity-80 scale-75 md:scale-100">
             <Logo />
           </Link>
 
@@ -43,5 +43,5 @@ export default async function Home({
 
       <Footer />
     </main>
-  )
+  );
 }

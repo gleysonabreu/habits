@@ -30,7 +30,7 @@ export const getSummary = async (habitId: string) => {
     FROM days D
     `;
 
-    const filteredSummary = summary.map(item => {
+    const filteredSummary = summary.map((item) => {
       return {
         ...item,
         completed: Number(item.completed),
@@ -43,4 +43,4 @@ export const getSummary = async (habitId: string) => {
     console.log(error);
     return null;
   }
-}
+};

@@ -8,4 +8,3 @@ dayjs.extend(utc);
 dayjs.locale('pt-br');
 dayjs.extend(relativeTime);
 dayjs.extend(weekday);
-

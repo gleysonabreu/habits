@@ -1,10 +1,10 @@
-import { Footer } from "@/components/Footer"
-import { Header } from "@/components/Header"
+import { Footer } from '@/components/Footer';
+import { Header } from '@/components/Header';
 
 export default function UsernameLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-between w-full">
@@ -12,5 +12,5 @@ export default function UsernameLayout({
       {children}
       <Footer />
     </div>
-  )
+  );
 }

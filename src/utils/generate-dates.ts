@@ -10,7 +10,7 @@ export function generateDates() {
   while (compare.isBefore(today)) {
     dates.push(compare.toDate());
     compare = compare.add(1, 'day');
-  };
+  }
 
   return dates;
 }

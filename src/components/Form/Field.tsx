@@ -1,12 +1,7 @@
-import { HtmlHTMLAttributes } from "react";
+import { HtmlHTMLAttributes } from 'react';
 
-type FieldProps = HtmlHTMLAttributes<HTMLDivElement> & {}
+type FieldProps = HtmlHTMLAttributes<HTMLDivElement> & {};
 
 export function Field(props: FieldProps) {
-  return (
-    <div
-      className='flex flex-col gap-3'
-      {...props}
-    />
-  );
+  return <div className="flex flex-col gap-3" {...props} />;
 }

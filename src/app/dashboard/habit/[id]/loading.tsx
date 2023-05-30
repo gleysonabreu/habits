@@ -1,4 +1,4 @@
-import { generateDates } from "@/utils/generate-dates";
+import { generateDates } from '@/utils/generate-dates';
 
 const summaryDates = generateDates();
 
@@ -19,18 +19,24 @@ export default function Loading() {
             </div>
           </div>
         </header>
-        <div className='w-full flex flex-col lg:flex-row gap-3 items-center justify-center'>
-          <div className='grid grid-cols-7 lg:grid-cols-none lg:grid-rows-7 grid-flow-col lg:grid-flow-row gap-1'>
-            {[...Array(7).keys()].map(i => (
-              <div key={i} className='animate-pulse h-10 w-10 lg:h-5 lg:w-5 rounded-xl lg:rounded-md lg:text-xs font-bold flex items-center justify-center text-zinc-100 bg-brand-primary'>
+        <div className="w-full flex flex-col lg:flex-row gap-3 items-center justify-center">
+          <div className="grid grid-cols-7 lg:grid-cols-none lg:grid-rows-7 grid-flow-col lg:grid-flow-row gap-1">
+            {[...Array(7).keys()].map((i) => (
+              <div
+                key={i}
+                className="animate-pulse h-10 w-10 lg:h-5 lg:w-5 rounded-xl lg:rounded-md lg:text-xs font-bold flex items-center justify-center text-zinc-100 bg-brand-primary"
+              >
                 <p className="sr-only">week day</p>
               </div>
             ))}
           </div>
 
-          <div className='grid grid-flow-row lg:grid-flow-col grid-cols-7 lg:grid-cols-none lg:grid-rows-7 gap-1'>
-            {summaryDates.map(date => (
-              <div key={date.toString()} className='animate-pulse h-10 w-10 lg:h-5 lg:w-5 rounded-xl lg:rounded-md bg-zinc-200 dark:bg-zinc-900 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background dark:focus:ring-offset-zinc-900 focus:ring-offset-zinc-100 focus:ring-sky-600' />
+          <div className="grid grid-flow-row lg:grid-flow-col grid-cols-7 lg:grid-cols-none lg:grid-rows-7 gap-1">
+            {summaryDates.map((date) => (
+              <div
+                key={date.toString()}
+                className="animate-pulse h-10 w-10 lg:h-5 lg:w-5 rounded-xl lg:rounded-md bg-zinc-200 dark:bg-zinc-900 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background dark:focus:ring-offset-zinc-900 focus:ring-offset-zinc-100 focus:ring-sky-600"
+              />
             ))}
           </div>
         </div>

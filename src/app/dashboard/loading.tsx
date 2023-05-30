@@ -18,8 +18,11 @@ export default function Loading() {
         </header>
 
         <div className="w-full px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-6">
-          {[...Array(5).keys()].map(i => (
-            <div key={i} className="rounded-2xl bg-zinc-200 dark:bg-zinc-900 p-1 animate-pulse">
+          {[...Array(5).keys()].map((i) => (
+            <div
+              key={i}
+              className="rounded-2xl bg-zinc-200 dark:bg-zinc-900 p-1 animate-pulse"
+            >
               <div className="block rounded-xl h-64  p-4 sm:p-6 lg:p-8" />
             </div>
           ))}
