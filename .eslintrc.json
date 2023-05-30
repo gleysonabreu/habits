@@ -73,6 +73,7 @@
       }
     ],
     "no-unused-expressions": "off",
+    "no-var": "off",
     "no-empty-function": "off",
     "no-nested-ternary": "off",
     "no-shadow": "off",
