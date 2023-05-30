@@ -4,6 +4,7 @@ import { getSummary } from '@/app/actions/getSummary';
 import { getHabit } from '@/app/actions/getHabit';
 import { Summary as SummaryList } from './components/Summary';
 import { Header } from './components/Header';
+import { SummaryInfo } from '@/components/Summary/SummaryInfo';
 
 type MeSummaryPropsPage = {
   params: {
@@ -37,7 +38,10 @@ export default async function Summary({ params }: MeSummaryPropsPage) {
     <main className="w-full pt-16">
       <div className="max-w-screen-2xl mx-auto mt-5 mb-6">
         <Header title={habit.title} />
-        <SummaryList summary={summary} habit={habit} />
+        <div className='flex flex-col gap-5 items-center lg:items-end'>
+          <SummaryList summary={summary} habit={habit} />
+          <SummaryInfo />
+        </div>
       </div>
     </main>
   );
