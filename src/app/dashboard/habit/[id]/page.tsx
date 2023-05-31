@@ -6,7 +6,6 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getSummary } from '@/app/actions/getSummary';
 import { getHabit } from '@/app/actions/getHabit';
 import { SummaryList } from '@/components/Summary';
-import { SummaryInfo } from '@/components/Summary/SummaryInfo';
 
 type SummaryPropsPage = {
   params: {
@@ -48,10 +47,7 @@ export default async function Summary({ params }: SummaryPropsPage) {
     <main className="w-full pt-16">
       <div className="max-w-screen-2xl mx-auto mt-5 mb-6">
         <HeaderHabitDetails title={habit.title} habitId={habit.id} />
-        <div className="flex flex-col gap-5 items-center lg:items-end">
-          <SummaryList summary={summary} habit={habit} />
-          <SummaryInfo />
-        </div>
+        <SummaryList summary={summary} habit={habit} mode="edit" />
       </div>
     </main>
   );

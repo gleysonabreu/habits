@@ -11,6 +11,7 @@ type CheckboxProps = {
   isCompleted: boolean;
   date: Date;
   handleCompleted: (taskId: string) => void;
+  mode?: 'view' | 'edit';
 };
 
 type Message = AlertProps;
@@ -21,6 +22,7 @@ export function Checkbox({
   taskName,
   isCompleted,
   handleCompleted,
+  mode,
 }: CheckboxProps) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<Message | null>(null);
@@ -106,7 +108,7 @@ export function Checkbox({
         onClick={handleToggleCompleted}
         className="flex items-center gap-3 group focus:outline-none disabled:cursor-not-allowed"
         defaultChecked={isCompleted}
-        disabled={past}
+        disabled={past || mode === 'view'}
       >
         <div className="group-focus:ring-2 group-focus:ring-brand-primary h-8 w-8 rounded-xl flex items-center justify-center bg-zinc-300 dark:bg-zinc-900 border-2 border-zinc-400 dark:border-zinc-800 group-data-[state=checked]:bg-brand-green group-data-[state=checked]:border-green-200">
           <CheckboxRadix.Indicator>

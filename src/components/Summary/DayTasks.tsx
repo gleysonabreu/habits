@@ -10,6 +10,7 @@ type DayTasksProps = {
   date: Date;
   handleCompleted: (completed: number) => void;
   handleAmount: (amount: number) => void;
+  mode?: 'view' | 'edit';
 };
 
 type Tasks = {
@@ -29,6 +30,7 @@ export function DayTaks({
   date,
   handleCompleted,
   handleAmount,
+  mode,
 }: DayTasksProps) {
   const weekDay = dayjs(date).get('day');
   const dateNow = dayjs(date).format('YYYY-MM-DD');
@@ -101,6 +103,7 @@ export function DayTaks({
               taskName={dayTask.name}
               taskId={dayTask.id}
               isCompleted={isCompleted}
+              mode={mode}
             />
           );
         })

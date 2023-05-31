@@ -8,7 +8,7 @@ type HeaderProps = {
   title: string;
 };
 
-export function Header({ title }: HeaderProps) {
+export function HeaderMe({ title }: HeaderProps) {
   const [isCopied, setIsCopied] = useState(false);
 
   const pathname = usePathname();

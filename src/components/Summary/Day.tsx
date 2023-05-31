@@ -10,6 +10,7 @@ type DayProps = {
   defaultCompleted?: number;
   defaultAmount?: number;
   habitId: string;
+  mode?: 'view' | 'edit';
 };
 
 export function Day({
@@ -17,6 +18,7 @@ export function Day({
   date,
   defaultAmount = 0,
   defaultCompleted = 0,
+  mode,
 }: DayProps) {
   const [completed, setCompleted] = useState(defaultCompleted);
   const [amount, setAmount] = useState(defaultAmount);
@@ -51,6 +53,7 @@ export function Day({
         habitId={habitId}
         date={date}
         handleCompleted={handleCompletedChaged}
+        mode={mode}
         handleAmount={onChangeAmount}
       />
     </Popover>
