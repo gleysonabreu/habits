@@ -19,7 +19,6 @@ import { Form } from './Form';
 import { weekDaysAvailable } from '@/utils/week-days-avaiable';
 
 type HeaderHabitDetailsProps = {
-  title: string;
   habitId: string;
 };
 
@@ -30,10 +29,7 @@ type CreateTaskProps = {
 
 type Message = AlertProps;
 
-export function HeaderHabitDetails({
-  title,
-  habitId,
-}: HeaderHabitDetailsProps) {
+export function CreateNewTask({ habitId }: HeaderHabitDetailsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState<Message | null>(null);
 
@@ -174,7 +170,7 @@ export function HeaderHabitDetails({
   }
 
   return (
-    <header>
+    <>
       <Modal title="Criar tarefa" isOpen={isModalOpen} closeModal={closeModal}>
         <FormProvider {...createTaskForm}>
           <form
@@ -259,30 +255,13 @@ export function HeaderHabitDetails({
         </FormProvider>
       </Modal>
 
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="text-center sm:text-left">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
-              {title}
-            </h1>
-          </div>
-
-          <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-            <Button
-              title="Nova tarefa"
-              size="lg"
-              variant="white"
-              onClick={openModal}
-            >
-              <span className="block">Nova tarefa</span>
-              <Plus
-                size={16}
-                className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5"
-              />
-            </Button>
-          </div>
-        </div>
-      </div>
-    </header>
+      <Button title="Nova tarefa" size="lg" variant="white" onClick={openModal}>
+        <span className="block">Nova tarefa</span>
+        <Plus
+          size={16}
+          className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5"
+        />
+      </Button>
+    </>
   );
 }

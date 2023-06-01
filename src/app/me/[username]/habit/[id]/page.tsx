@@ -4,6 +4,8 @@ import { getSummary } from '@/app/actions/getSummary';
 import { getHabit } from '@/app/actions/getHabit';
 import { SummaryList } from '@/components/Summary';
 import { HeaderMe } from '@/components/HeaderMe';
+import { CopyUrl } from '@/components/Settings/CopyUrl';
+import { getUserById } from '@/app/actions/getUserById';
 
 type MeSummaryPropsPage = {
   params: {
@@ -35,10 +37,18 @@ export default async function Summary({ params }: MeSummaryPropsPage) {
     notFound();
   }
 
+  const user = await getUserById(habit.userId);
+
+  if (!user) notFound();
+
+  const copyUrl = `${process.env.NEXT_PUBLIC_URL}/me/${user.username}/habit/${habit.id}`;
+
   return (
     <main className="w-full pt-16">
       <div className="max-w-screen-2xl mx-auto mt-5 mb-6">
-        <HeaderMe title={habit.title} />
+        <HeaderMe title={habit.title} back>
+          <CopyUrl url={copyUrl} />
+        </HeaderMe>
         <SummaryList summary={summary} habit={habit} />
       </div>
     </main>

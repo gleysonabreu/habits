@@ -1,7 +1,6 @@
 'use client';
 import { Button } from '@/components/Button';
 import { Plus } from '@phosphor-icons/react';
-import { useSession } from 'next-auth/react';
 import Modal from './Modal';
 import { useState } from 'react';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
@@ -28,9 +27,8 @@ type CreateHabitProps = {
 
 type MessageRequest = AlertProps;
 
-export function HeaderSection() {
+export function CreateHabit() {
   const router = useRouter();
-  const { data: session } = useSession();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageRequest, setMessageRequest] = useState<MessageRequest | null>(
@@ -180,7 +178,7 @@ export function HeaderSection() {
   }
 
   return (
-    <header>
+    <>
       <Modal title="Criar hábito" isOpen={isModalOpen} closeModal={closeModal}>
         <FormProvider {...createHabitForm}>
           <form
@@ -284,34 +282,18 @@ export function HeaderSection() {
         </FormProvider>
       </Modal>
 
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <div className="sm:flex sm:items-start sm:justify-between">
-          <div className="text-center sm:text-left">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
-              Bem-vindo de volta, {session?.user?.name}!
-            </h1>
-
-            <p className="mt-1.5 text-sm text-gray-400 dark:text-gray-500">
-              Vamos criar novos hábitos?
-            </p>
-          </div>
-
-          <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-            <Button
-              title="Criar hábito"
-              size="lg"
-              variant="white"
-              onClick={openModal}
-            >
-              <span className="block">Novo hábito</span>
-              <Plus
-                size={16}
-                className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5"
-              />
-            </Button>
-          </div>
-        </div>
-      </div>
-    </header>
+      <Button
+        title="Criar hábito"
+        size="lg"
+        variant="white"
+        onClick={openModal}
+      >
+        <span className="block">Novo hábito</span>
+        <Plus
+          size={16}
+          className="block ml-1 transition duration-200 transform group-hover:translate-x-0.5"
+        />
+      </Button>
+    </>
   );
 }
