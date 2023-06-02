@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { Settings } from './Settings';
+import { ToggleTheme } from './ToggleTheme';
 
 export function Header() {
   const { data: session } = useSession();
@@ -29,6 +30,8 @@ export function Header() {
               <Logo />
             </div>
           </Link>
+
+          {!session && <ToggleTheme />}
 
           {session && (
             <Menu as="div" className="relative">

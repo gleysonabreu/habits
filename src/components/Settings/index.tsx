@@ -11,6 +11,7 @@ import { useSession } from 'next-auth/react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CopyUrl } from './CopyUrl';
+import { useTheme } from '@/hooks/useTheme';
 
 type MessageProps = AlertProps;
 
@@ -25,6 +26,7 @@ type SettingsProps = {
 
 export function Settings({ open, close }: SettingsProps) {
   const { data: session } = useSession();
+  const { theme, toggleTheme } = useTheme();
 
   const [isPublic, setIsPublic] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -221,6 +223,32 @@ export function Settings({ open, close }: SettingsProps) {
                 />
               </Switch>
               {loading && <CircleNotch size={25} className="animate-spin" />}
+            </div>
+
+            <div className="flex gap-4">
+              <p className="font-bold text-zinc-400">Ativar tema escuro?</p>
+              <Switch
+                checked={theme === 'dark'}
+                onChange={toggleTheme}
+                className={clsx(
+                  'relative inline-flex h-6 w-11 items-center rounded-full disabled:cursor-not-allowed',
+                  {
+                    'bg-brand-green': theme === 'dark',
+                    'bg-zinc-700': theme !== 'dark',
+                  },
+                )}
+              >
+                <span className="sr-only">Enable/disable dark theme</span>
+                <span
+                  className={clsx(
+                    'inline-block h-4 w-4 transform rounded-full bg-zinc-900 transition',
+                    {
+                      'translate-x-6': theme === 'dark',
+                      'translate-x-1': theme !== 'dark',
+                    },
+                  )}
+                />
+              </Switch>
             </div>
           </Form.Field>
         </div>
